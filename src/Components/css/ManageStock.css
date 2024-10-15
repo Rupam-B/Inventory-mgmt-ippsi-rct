@@ -1,0 +1,57 @@
+.Home-Main-div{
+    /* padding: 30px; */
+    display: flex;
+}
+.prod-desc-tab{
+    max-width: 200px;
+    margin-right: 50px;
+    text-wrap: wrap;
+}
+.show-edit-later{
+    position: fixed;
+    top: 0;
+    width: 90vw;
+    margin: auto;
+}
+.New-Order-button{
+    position:'absolute';
+    right:'20px';
+    top:'100px';
+    /* background-color: red; */
+  }
+
+
+
+
+
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+    }
+    .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+
+
+/* 
+    @media (max-width: 500px) {
+        .New-Order-button{
+            position:'absolute';
+            left:'0';
+            right: auto;
+            top:'80px'
+        }
+        } */

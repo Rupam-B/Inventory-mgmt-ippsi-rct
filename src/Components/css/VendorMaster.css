@@ -1,0 +1,16 @@
+.show-add-vendor-modal{
+    position: absolute;
+    height: auto;
+    width: 40vw;
+    margin-left: 25%;
+    border: 1px solid rgb(71, 71, 71,0.3);
+    background-color: white;
+    z-index: 2;
+    border-radius: 5px;
+    padding: 40px;
+
+    text-align: left;
+}
+.hide-add-vendor-modal{
+    display: none;
+}

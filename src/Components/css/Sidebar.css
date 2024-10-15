@@ -1,0 +1,119 @@
+.drop-down-link {
+    color: #cfbbbb;
+}
+
+.drop-down-link:hover {
+    color: hsl(0, 0%, 100%);
+}
+
+.nav-link {
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebar {
+    width: 25vw; 
+    min-width: 150px; 
+    max-width: 200px; 
+    background-color: #343a40; 
+    overflow-y: auto; 
+    position: fixed;
+    overflow: hidden;
+    z-index: 2;
+    transition: width 0.3s ease; /* Smooth transition for toggle */
+}
+
+.sidebar-hide {
+    max-width: 0;
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease; /* Smooth transition for toggle */
+}
+
+.sidebar-close-btn {
+    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.sidebar-show-btn {
+    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    border: none;
+}
+
+.sidebar-show-btn-disp-none {
+    display: none;
+}
+
+/* Media query for max-width 500px */
+@media (max-width: 500px) {
+    .sidebar {
+        width: 100vw; /* Full width of the screen */
+        min-width: 100px; /* Ensure minimum width */
+        max-width: 100%; /* Ensure it doesn't go beyond screen width */
+        height: 100vh; /* Full height to cover the screen */
+        position: fixed;
+        z-index: 2;
+        overflow-y: auto;
+        transition: width 0.3s ease; /* Smooth transition for toggle */
+    }
+
+    .sidebar-hide {
+        max-width: 0;
+        width: 0;
+        min-width: 0;
+        height: 100vh; /* Ensure it still covers the screen height */
+        overflow: hidden;
+        transition: width 0.3s ease; /* Smooth transition for toggle */
+    }
+
+    .sidebar-close-btn {
+        right: 5px;
+        top: 5px;
+    }
+
+    .sidebar-show-btn {
+        left: 5px;
+        top: 5px;
+    }
+
+    .drop-down-link {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .nav-link {
+        font-size: 16px; /* Adjust font size for better readability */
+    }
+
+    .dropdown-toggle {
+        font-size: 14px; /* Adjust the font size for user dropdown */
+    }
+
+    /* Additional adjustments */
+    .d-flex.align-items-center {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    /* Ensure links are visible */
+    .nav-pills .nav-link {
+        display: block;
+        width: 100%; /* Ensure full width */
+        padding: 10px; /* Add padding for touch targets */
+        color: #cfbbbb;
+    }
+
+    .nav-pills .nav-link:hover {
+        background-color: #495057; /* Add hover effect */
+        color: white;
+    }
+}

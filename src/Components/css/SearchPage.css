@@ -1,0 +1,20 @@
+.Search-div-Search-component{
+    display: flex;
+    margin-top: 30px;
+}
+.Search-div-Search-component input{
+    width: 40%;
+    margin-right: 10px;
+}
+
+
+
+@media screen and (max-width:500px) {
+
+    .Search-div-Search-component input{
+        width: 70%;
+        margin-right: 10px;
+    }
+  
+  
+    }

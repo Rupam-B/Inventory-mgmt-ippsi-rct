@@ -1,0 +1,300 @@
+/* HomePage.css */
+.homepage-container {
+    display: flex;
+    /* border: 2px solid red; */
+  }
+  
+  .content {
+    flex-grow: 1; /* This makes the content take up the remaining space */
+    /* padding: 20px; Add some padding for better appearance */
+    /* border: 2px solid rgb(13, 0, 255); */
+  }
+  
+
+
+  /* html {
+    position: relative;
+    min-height: 100%;
+  } */
+  
+  body {
+    overflow-x: hidden;
+    /* font-family: lato; */
+    /* background-color: #EEEEEE; */
+  }
+
+  .Search-Box-in_dashboard{
+    border: 1px solid rgb(128, 128, 128,0.7);
+    width: 300px;
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+  }
+  
+  .textside {
+    margin-left: 25px;
+  }
+  
+  .navlogo img {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 60%;
+  }
+  
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background: #FFFFFF;
+    height: 60px;
+    color: white;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 6px 10px;
+    margin: 5px 0px 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+  }
+  
+  a {
+    color: #7D7D7D;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+  }
+  
+  a:hover {
+    color: #7D7D7D;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+  }
+  
+  .inforide {
+    box-shadow: 1px 2px 8px 0px #f0d1d1;
+    background-color: white;
+    border-radius: 8px;
+    height: 250px;
+    /* background-color: #EEEEEE; */
+  }
+  
+  .rideone img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .ridetwo img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .ridethree img {
+    width: 100%;
+    border-radius: 20%;
+  }
+  .ridefour img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .rideone {
+    /* background-color: #6CC785; */
+    padding-top: 25px;
+    border-radius: 8px 0px 0px 8px;
+    text-align: center;
+    height: 250px;
+    margin-left: 15px;
+    background-color:  #fef1f1;
+  }
+  
+  .ridetwo {
+    /* background-color: #c6b3fa; */
+    padding-top: 30px;
+    border-radius: 8px 0px 0px 8px;
+    text-align: center;
+    height: 250px;
+    margin-left: 15px;
+    background-color:  #fef1f1;
+  }
+  
+  .ridethree {
+    /* background-color: #4EBCE5; */
+    padding-top: 35px;
+    border-radius: 8px 0px 0px 8px;
+    text-align: center;
+    height: 250px;
+    margin-left: 15px;
+    background-color:  #fef1f1;
+  }
+  .ridefour {
+    /* background-color: #4EBCE5; */
+    padding-top: 35px;
+    border-radius: 8px 0px 0px 8px;
+    text-align: center;
+    height: 250px;
+    margin-left: 15px;
+    background-color:  #fef1f1;
+  }
+  
+  .fontsty {
+    margin-right: -15px;
+  }
+  
+  .fontsty h2{
+    color: #6E6E6E;
+    font-size: 35px;
+    margin-top: 15px;
+    text-align: left;
+    margin-right: 30px;
+  }
+  
+  .fontsty h4{
+    color: #6E6E6E;
+    font-size: 25px;
+    margin-top: 20px;
+    text-align: left;
+    margin-right: 30px;
+  }
+  
+  .content-wrapper {
+    min-height: calc(100vh - 56px);
+    padding-top: 4rem;
+    overflow-x: hidden;
+    background: transparent;
+  }
+  
+  #mainNav .navbar-collapse {
+    overflow: auto;
+    max-height: 75vh;
+  }
+  
+ 
+  
+  #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+    cursor: pointer;
+  }
+  
+  #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+    float: right;
+    content: '\f107';
+    font-family: 'FontAwesome';
+  }
+  
+  #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse.collapsed:after {
+    content: '\f105';
+  }
+  
+  #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link{
+    position: relative;
+    min-width: 45px;
+  }
+  
+  #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
+    float: right;
+    width: auto;
+    content: '\f105';
+    border: none;
+    font-family: 'FontAwesome';
+  }
+  
+  #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown.show > .nav-link:after {
+    content: '\f107';
+  }
+  
+  #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+    color: #868e96;
+  }
+  
+  #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+    color: white;
+  }
+  
+  #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
+    color: #D04153;
+    border-radius: 30px;
+    background-color: white;
+  }
+  
+  #mainNav.navbar-dark .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
+    color: #D04153;
+  }
+  
+  #mainNav.navbar-light .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  
+  #mainNav.navbar-light .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  
+  body.sidenav-toggled .navbar-sidenav {
+    width: 55px;
+  }
+  
+  body.sidenav-toggled .navbar-sidenav .nav-link-text {
+    display: none;
+  }
+  
+  body.sidenav-toggled .navbar-sidenav .nav-item,
+  body.sidenav-toggled .navbar-sidenav .nav-link {
+    width: 55px !important;
+  }
+  
+  body.sidenav-toggled .navbar-sidenav .nav-item:after,
+  body.sidenav-toggled .navbar-sidenav .nav-link:after {
+    display: none;
+  }
+  
+  body.sidenav-toggled .navbar-sidenav .nav-item {
+    white-space: nowrap;
+  }
+  
+  
+  
+
+  @media screen and (max-width:500px) {
+
+    
+  .Search-Box-in_dashboard{
+    border: 1px solid rgb(128, 128, 128,0.7);
+    width: 85%;
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    z-index: 1;
+  }
+
+
+  }
