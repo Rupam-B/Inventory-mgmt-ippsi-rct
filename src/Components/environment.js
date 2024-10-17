@@ -1,12 +1,12 @@
 // Production base URL
-// export const environment = {
-//     production: true,
-//     baseUrl: 'https://store-mgmt-javasb-bcknd-production.up.railway.app'  
-// };
+export const environment = {
+    production: true,
+    baseUrl: 'https://inventory-mgmt-ippsi-bcknd-sb-java.onrender.com'  
+};
 
 // Development base URL
-export const environment = {
-    production: false,
-    baseUrl: 'http://localhost:8080'  
-  };
+// export const environment = {
+//     production: false,
+//     baseUrl: 'http://localhost:8080'  
+//   };
   
