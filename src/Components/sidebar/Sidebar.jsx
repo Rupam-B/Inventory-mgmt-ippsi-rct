@@ -59,12 +59,12 @@ const Sidebar = () => {
                     </button>
                     <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <Link className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <span className="fs-5 d-none d-sm-inline">Menu</span>
+                            <span className="fs-5  d-sm-inline">Menu</span>
                         </Link>
                         <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             <li>
                                 <div onClick={toggleSubmenu1} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+                                    <i className="fs-4 bi-speedometer2"></i> <span className="ms-1  d-sm-inline">Dashboard</span>
                                 </div>
                                 {submenu1Open && (
                                     <ul className="nav flex-column ms-1">
@@ -82,7 +82,7 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <div onClick={toggleSubmenu4} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Vendor Master</span>
+                                    <i className="fs-4 bi-table"></i> <span className="ms-1 d-sm-inline">Vendor Master</span>
                                 </div>
                                 {submenu4Open && (
                                     <ul className="nav flex-column ms-1">
@@ -97,19 +97,19 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <div  className="nav-link px-0 align-middle text-white fw-bold">
-                                <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline"><Link to={'/CategoryMaster'} className='text-white'>Category Master</Link></span>
+                                <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/CategoryMaster'} className='text-white'>Category Master</Link></span>
                                 </div>
                               
                             </li>
                             <li>
                                 <div  className="nav-link px-0 align-middle text-white fw-bold">
-                                <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline"><Link to={'/ProductMaster'} className='text-white'>Product Master</Link></span>
+                                <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/ProductMaster'} className='text-white'>Product Master</Link></span>
                                 </div>
                               
                             </li>
                             <li>
                                 <div onClick={toggleSubmenu2} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-bootstrap"></i> <span className="ms-1 d-none d-sm-inline">Users</span>
+                                    <i className="fs-4 bi-bootstrap"></i> <span className="ms-1  d-sm-inline">Users</span>
                                 </div>
                                 {submenu2Open && ipssiuserId===1 && (
                                     <ul className="nav flex-column ms-1">
@@ -124,7 +124,7 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <div onClick={toggleSubmenu3} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-grid"></i> <span className="ms-1 d-none d-sm-inline">Stock transfer</span>
+                                    <i className="fs-4 bi-grid"></i> <span className="ms-1  d-sm-inline">Stock transfer</span>
                                 </div>
                                 {submenu3Open && (
                                     <ul className="nav flex-column ms-1">
@@ -151,7 +151,7 @@ const Sidebar = () => {
                         <div  className="dropdown pb-4">
                             <Link className="d-flex align-items-center text-white text-decoration-none dropdown-toggle text-white fw-bold" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="hugenerd" width="30" height="30" className="rounded-circle" />
-                                <span className="d-none d-sm-inline mx-1">{userName?userName:''}</span>
+                                <span className=" d-sm-inline mx-1">{userName?userName:''}</span>
                             </Link>
 
                             {/* { */}
