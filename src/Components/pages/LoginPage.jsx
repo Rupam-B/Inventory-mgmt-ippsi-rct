@@ -3,6 +3,7 @@ import '../css/LoginPage.css'
 import { environment } from '../environment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
 const LoginPage = () => {
 
@@ -10,11 +11,13 @@ const LoginPage = () => {
 
     const [userName, setUserName ] = useState("")
     const [userPassword, setUserPassword ] = useState("")
+    const [ifLoader, setIfLoader] = useState(false)
 
     const baseUrl = environment.baseUrl
 
 
     const handleLogin = () => {
+      setIfLoader(true)
         axios.post(`${baseUrl}/auth/login`, {
           username: userName,
           password: userPassword
@@ -26,6 +29,7 @@ const LoginPage = () => {
             })
             
         .then(response => {
+          setIfLoader(false)
           // console.log("Login successful: ", response.data);
           localStorage.setItem("ipssi_Jwt", response.data.jwt)
           localStorage.setItem("ipssi_userId", response.data.userId)
@@ -36,6 +40,7 @@ const LoginPage = () => {
           
         })
         .catch(error => {
+          setIfLoader(false)
           console.error("Login failed: ", error.response ? error.response.data : error.message);
           alert('Wrong credentials')
         });
@@ -57,6 +62,10 @@ const LoginPage = () => {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-xl-10">
             <div className="card rounded-3 text-black">
+              {
+                ifLoader?    
+                <Loader/>:''
+              }
               <div className="row g-0">
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">

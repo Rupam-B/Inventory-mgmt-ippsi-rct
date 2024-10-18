@@ -6,6 +6,7 @@ import axios from 'axios'
 import { environment } from '../environment'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Loader from './Loader'
 
 const ManageStocks = () => {
 
@@ -13,6 +14,8 @@ const ManageStocks = () => {
   const baseUrl = environment.baseUrl
   const token = localStorage.getItem('ipssi_Jwt')
   const navigate = useNavigate();
+
+  const [ifLoader, setIfLoader] = useState(false)
 
   const [selectedDevices, setSelectedDevices] = useState([]);
   const [userStocks, setUserStocks] = useState([])
@@ -46,6 +49,8 @@ const ManageStocks = () => {
   const generateTransfer = async ()=>{
     if(selectedDevices.length>0 && fetchUserId&&sourceDestination){
 
+      setIfLoader(true)
+
       await axios.post(`${baseUrl}/transfer/createTransfer`, {
         serialNumbers: selectedDevices,
         sourceUserId:fetchUserId, 
@@ -58,11 +63,13 @@ const ManageStocks = () => {
   }
   })
     .then((resp)=>{
+      setIfLoader(false)
       // console.log(resp.data)
       toast.success("Transfer Created Successfully")
       navigate("/StockTransferStatus")
     })
     .catch((err)=>{
+      setIfLoader(false)
       console.log(err)
     })
     ;
@@ -119,6 +126,7 @@ const ManageStocks = () => {
 
 
     if (confirmDelete) {
+      setIfLoader(true)
       axios.delete(`${baseUrl}/deleteProduct/${proId}/user/${fetchUserId}`, {
         headers: {
           'Content-Type': 'application/json',
@@ -126,10 +134,12 @@ const ManageStocks = () => {
         }
       })
         .then(resp => {
+          setIfLoader(false)
           alert(resp.data);
           setReload(!reload)
         })
         .catch(err => {
+          setIfLoader(false)
           console.log(err);
         });
     } else {
@@ -142,6 +152,7 @@ const ManageStocks = () => {
 
 
   useEffect(() => {
+    setIfLoader(true)
     axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -150,10 +161,12 @@ const ManageStocks = () => {
     }
     )
       .then((resp) => {
+        setIfLoader(false)
         // console.log(resp.data)
         setUserStocks(resp.data)
       })
       .catch((error) => {
+        setIfLoader(false)
         console.log(error)
       })
   }, [token, baseUrl, fetchUserId, showModal, reload])
@@ -185,6 +198,12 @@ const ManageStocks = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+        {/* -----------Loader----------- */}
+
+      {
+                ifLoader?    
+                <Loader/>:''
+              }
         <div className="content-wrapper">
 
 
