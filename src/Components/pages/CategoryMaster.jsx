@@ -5,6 +5,8 @@ import { environment } from '../environment'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../sidebar/Sidebar'
+import Loader from './Loader'
+import { toast } from 'react-toastify'
 
 const CategoryMaster = () => {
     
@@ -14,6 +16,8 @@ const CategoryMaster = () => {
   const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
   const baseUrl = environment.baseUrl
   const token = localStorage.getItem('ipssi_Jwt')
+
+  const [ifLoader, setIfLoader] = useState(false)
 
   const [vendors, setVendors] = useState([])
   const [showModal, setShowModal] = useState(false)
@@ -27,6 +31,7 @@ const CategoryMaster = () => {
 
 
     useEffect(() => {
+      setIfLoader(true)
         axios.get(`${baseUrl}/allCategories`, {
           headers: {
             "Content-Type": "application/json",
@@ -35,11 +40,14 @@ const CategoryMaster = () => {
         }
         )
           .then((resp) => {
+            setIfLoader(false)
             // console.log(resp.data)
             setVendors(resp.data)
           })
           .catch((error) => {
+            setIfLoader(false)
             console.log(error)
+            toast.error(error.message)
           })
       }, [token, baseUrl, fetchUserId, showModal])
 
@@ -47,6 +55,7 @@ const CategoryMaster = () => {
 
       
   const AddCaetgory = () => {
+    setIfLoader(true)
     axios.post(`${baseUrl}/addCategory`, {
       categoryName: categoryName,
     }
@@ -57,12 +66,14 @@ const CategoryMaster = () => {
         }
       })
       .then(resp => {
+        setIfLoader(false)
         console.log(`Vendor added successfully`);
         setShowModal(false)
         navigate('/CategoryMaster')
 
       })
       .catch(err => {
+        setIfLoader(false)
         console.log(err);
       });
   }
@@ -71,6 +82,10 @@ const CategoryMaster = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
           <div className={showModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>

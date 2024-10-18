@@ -4,11 +4,14 @@ import { environment } from '../../environment'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import '../../css/root.css'
+import Loader from '../Loader'
+import { toast } from 'react-toastify'
 
 
 const ModelMaster = () => {
 
   const navigate = useNavigate();
+  const [ifLoader, setIfLoader] = useState(false)
 
   const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
   const baseUrl = environment.baseUrl
@@ -26,6 +29,7 @@ const ModelMaster = () => {
 
 
   const AddModel =()=>{
+    setIfLoader(true)
     axios.post(`${baseUrl}/addModel/vendor/${addVendorsIdselect}`, {
         modelname:modelName,
     }
@@ -36,13 +40,16 @@ const ModelMaster = () => {
         }
     })
     .then(resp => {
+      setIfLoader(false)
         console.log(`Vendor added successfully`);
         setShowModal(false)
         navigate('/ModelMaster')
         
     })
     .catch(err => {
+      setIfLoader(false)
         console.log(err);
+        toast.error(err.message)
     });
   }
 
@@ -78,6 +85,7 @@ const ModelMaster = () => {
         })
         .catch((error) => {
           console.log(error)
+          toast.error(error.message)
         })
 
     }
@@ -87,7 +95,7 @@ const ModelMaster = () => {
   // }
 
   useEffect(() => {
-
+    setIfLoader(true)
     axios.get(`${baseUrl}/vendors`, {
       headers: {
         "Content-Type": "application/json",
@@ -96,10 +104,12 @@ const ModelMaster = () => {
     }
     )
       .then((resp) => {
+        setIfLoader(false)
         // console.log(resp.data)
         setVendors(resp.data)
       })
       .catch((error) => {
+        setIfLoader(false)
         console.log(error)
       })
   }, [token, baseUrl, fetchUserId])
@@ -109,6 +119,10 @@ const ModelMaster = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
 

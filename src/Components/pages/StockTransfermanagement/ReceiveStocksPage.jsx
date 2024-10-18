@@ -3,6 +3,7 @@ import Sidebar from '../../sidebar/Sidebar'
 import { environment } from '../../environment'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import Loader from '../Loader';
 
 const ReceiveStocksPage = () => {
 
@@ -11,48 +12,36 @@ const ReceiveStocksPage = () => {
   const token = localStorage.getItem('ipssi_Jwt')
 
   const [userStocks, setUserStocks] = useState([])
+  const [ifLoader, setIfLoader] = useState(false)
 
 
   const [reload, setReload] = useState(false)
-
-  // useEffect(()=>{
-  //   axios.get(`${baseUrl}/products/user/${fetchUserId}`, {
-  //       headers:{
-  //         "Content-Type":"application/json",
-  //         Authorization : `Bearer ${token}`
-  //       }
-  //   }
-  // )
-  // .then((resp)=>{
-  //   // console.log(resp.data)
-  //   setUserStocks(resp.data)
-  // })
-  // .catch((error)=>{
-  //   console.log(error)
-  // })
-  // },[token,baseUrl,fetchUserId])
 
 
     const markAsReceived = async (transferId) => {
       const confirm = window.confirm("Do you want to mark this transfer as received?");
       if (confirm) {
           try {
+            setIfLoader(true)
               await axios.put(`${baseUrl}/transfer/mark-as-received/${transferId}`,null, {
                 headers: {
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${token}`
                 }
               });
+              setIfLoader(false)
               toast.success("Transfer marked as received!");
               setReload(!reload)
               
           } catch (error) {
+            setIfLoader(false)
               toast.error("Error receiving transfer");
           }
       }
   };
 
   useEffect(() => {
+    setIfLoader(true)
     axios.get(`${baseUrl}/transfer/destination/${fetchUserId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -61,10 +50,12 @@ const ReceiveStocksPage = () => {
     }
     )
       .then((resp) => {
+        setIfLoader(false)
         // console.log(resp.data)
         setUserStocks(resp.data)
       })
       .catch((error) => {
+        setIfLoader(false)
         console.log(error)
       })
   }, [token, baseUrl, fetchUserId,reload])
@@ -78,6 +69,10 @@ const ReceiveStocksPage = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
           <h1 style={{ textAlign: 'left' }}>Receive Incoming Stocks</h1>

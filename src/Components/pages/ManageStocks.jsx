@@ -46,37 +46,37 @@ const ManageStocks = () => {
     // console.log(selectedDevices)
   };
 
-  const generateTransfer = async ()=>{
-    if(selectedDevices.length>0 && fetchUserId&&sourceDestination){
+  const generateTransfer = async () => {
+    if (selectedDevices.length > 0 && fetchUserId && sourceDestination) {
 
       setIfLoader(true)
 
       await axios.post(`${baseUrl}/transfer/createTransfer`, {
         serialNumbers: selectedDevices,
-        sourceUserId:fetchUserId, 
+        sourceUserId: fetchUserId,
         destinationUserId: sourceDestination
-    },
-  {
-    headers:{
-      'Content-Type':'application/json',
-      Authorization : `Bearer ${token}`
-  }
-  })
-    .then((resp)=>{
-      setIfLoader(false)
-      // console.log(resp.data)
-      toast.success("Transfer Created Successfully")
-      navigate("/StockTransferStatus")
-    })
-    .catch((err)=>{
-      setIfLoader(false)
-      console.log(err)
-    })
-    ;
-  }
-  else{
-    toast.error("Please Select Devices to Transfer")
-  }
+      },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then((resp) => {
+          setIfLoader(false)
+          // console.log(resp.data)
+          toast.success("Transfer Created Successfully")
+          navigate("/StockTransferStatus")
+        })
+        .catch((err) => {
+          setIfLoader(false)
+          console.log(err)
+        })
+        ;
+    }
+    else {
+      toast.error("Please Select Devices to Transfer")
+    }
   }
 
 
@@ -176,21 +176,21 @@ const ManageStocks = () => {
   // console.log(askQuantity)
 
 
-  useEffect(()=>{
-    axios.get( `${baseUrl}/users` , {
-        headers:{
-            'Content-Type':'application/json',
-            Authorization : `Bearer ${token}`
-        }
+  useEffect(() => {
+    axios.get(`${baseUrl}/users`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
     })
-    .then(resp =>{
+      .then(resp => {
         // console.log(resp.data)
         setUsersData(resp.data)
-    })
-    .catch(err=>{
+      })
+      .catch(err => {
         console.log(err)
-    })
-},[baseUrl,token])
+      })
+  }, [baseUrl, token])
 
 
 
@@ -200,10 +200,10 @@ const ManageStocks = () => {
       <div className="content">
         {/* -----------Loader----------- */}
 
-      {
-                ifLoader?    
-                <Loader/>:''
-              }
+        {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
 
@@ -229,7 +229,7 @@ const ManageStocks = () => {
 
               <div className="d-flex justify-content-center">
                 <button type="button" data-mdb-button-init
-                onClick={generateTransfer}
+                  onClick={generateTransfer}
                   data-mdb-ripple-init className="btn btn-primary">Create transfer</button>
               </div>
 

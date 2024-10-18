@@ -4,6 +4,7 @@ import axios from 'axios'
 import { environment } from '../environment'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import Loader from './Loader'
 
 const AddDevicePage = () => {
 
@@ -11,6 +12,8 @@ const AddDevicePage = () => {
     const baseUrl = environment.baseUrl
     const token = localStorage.getItem('ipssi_Jwt')
     const navigate = useNavigate();
+
+    const [ifLoader, setIfLoader] = useState(false)
 
 
     // const [prodName, setProdName] = useState(null)
@@ -64,6 +67,7 @@ const AddDevicePage = () => {
 
     const AddProduct = () => {
         if(getVendorName&&vendorModelsName&&getcategoryName){
+            setIfLoader(true)
         axios.post(`${baseUrl}/api/product-master/add`, {
             productVendor:getVendorName,
             productModel: vendorModelsName,
@@ -77,6 +81,7 @@ const AddDevicePage = () => {
                 }
             })
             .then(resp => {
+                setIfLoader(false)
                 // console.log(resp)
                 toast.success("Successfully Added")
                 // console.log(resp.data)
@@ -84,6 +89,7 @@ const AddDevicePage = () => {
 
             })
             .catch(err => {
+                setIfLoader(false)
                 console.log(err)
                 toast.error("Server error or Duplicate Device")
             })
@@ -158,6 +164,12 @@ const AddDevicePage = () => {
             <Sidebar />
 
             <div className="content">
+                {/* -----------Loader----------- */}
+
+        {
+          ifLoader ?
+            <Loader /> : ''
+        }
                 <div className="content-wrapper">
 
 

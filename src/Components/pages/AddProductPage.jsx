@@ -5,6 +5,7 @@ import { environment } from '../environment'
 import { useNavigate } from 'react-router-dom'
 import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
+import Loader from './Loader'
 
 const AddProductPage = () => {
 
@@ -12,6 +13,8 @@ const AddProductPage = () => {
     const baseUrl = environment.baseUrl
     const token = localStorage.getItem('ipssi_Jwt')
     const navigate = useNavigate();
+
+    const [ifLoader, setIfLoader] = useState(false)
 
 
     const [file, setFile] = useState(null);
@@ -74,6 +77,8 @@ const AddProductPage = () => {
 
 
     const AddProduct = () => {
+
+        setIfLoader(true)
         axios.post(`${baseUrl}/api/stocks/add`, {
             usersId: usersIdselect,
             productId: productsIdselect,
@@ -88,12 +93,14 @@ const AddProductPage = () => {
                 }
             })
             .then(resp => {
+                setIfLoader(false)
                 console.log(resp)
-                alert("Successfully Added")
+                toast.success("Successfully Added")
                 navigate('/ManageStock')
 
             })
             .catch(err => {
+                setIfLoader(false)
                 console.log(err)
                 toast.error(err.message + "or wrong Data Entry")
             })
@@ -175,6 +182,10 @@ const uploadProductsFromExcel = () => {
             <Sidebar />
 
             <div className="content">
+            {
+          ifLoader ?
+            <Loader /> : ''
+        }
                 <div className="content-wrapper">
 
 

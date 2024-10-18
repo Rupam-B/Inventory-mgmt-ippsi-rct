@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from '../../sidebar/Sidebar'
 import { environment } from '../../environment'
 import axios from 'axios'
+import Loader from '../Loader'
 
 const StockTransferStatus = () => {
 
@@ -11,6 +12,9 @@ const StockTransferStatus = () => {
   const token = localStorage.getItem('ipssi_Jwt')
 
   const [userStocks, setUserStocks] = useState([])
+
+  
+  const [ifLoader, setIfLoader] = useState(false)
 
   // useEffect(()=>{
   //   axios.get(`${baseUrl}/products/user/${fetchUserId}`, {
@@ -31,6 +35,7 @@ const StockTransferStatus = () => {
 
 
   useEffect(() => {
+    setIfLoader(true)
     axios.get(`${baseUrl}/transfer/source/${fetchUserId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -39,10 +44,12 @@ const StockTransferStatus = () => {
     }
     )
       .then((resp) => {
+        setIfLoader(false)
         console.log(resp.data)
         setUserStocks(resp.data)
       })
       .catch((error) => {
+        setIfLoader(false)
         console.log(error)
       })
   }, [token, baseUrl, fetchUserId])
@@ -54,6 +61,10 @@ const StockTransferStatus = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
           <h1 style={{ textAlign: 'left' }}>Stock Transfer Status</h1>

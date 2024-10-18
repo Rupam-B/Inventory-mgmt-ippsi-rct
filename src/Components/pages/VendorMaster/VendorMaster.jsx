@@ -5,10 +5,13 @@ import axios from 'axios'
 
 import '../../css/VendorMaster.css'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../Loader'
+import { toast } from 'react-toastify'
 
 const VendorMaster = () => {
 
   const navigate = useNavigate();
+  const [ifLoader, setIfLoader] = useState(false)
 
 
   const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
@@ -27,6 +30,7 @@ const VendorMaster = () => {
   }
 
   const AddVendor = () => {
+    setIfLoader(true)
     axios.post(`${baseUrl}/addVendor`, {
       vendorName: vendorName,
       vendorAddress: vendorAddress,
@@ -39,17 +43,21 @@ const VendorMaster = () => {
         }
       })
       .then(resp => {
+        setIfLoader(false)
         console.log(`Vendor added successfully`);
         setShowModal(false)
         navigate('/VendorMaster')
 
       })
       .catch(err => {
+        setIfLoader(false)
         console.log(err);
+        toast.error(err.message)
       });
   }
 
   useEffect(() => {
+    setIfLoader(true)
     axios.get(`${baseUrl}/vendors`, {
       headers: {
         "Content-Type": "application/json",
@@ -58,11 +66,14 @@ const VendorMaster = () => {
     }
     )
       .then((resp) => {
+        setIfLoader(false)
         // console.log(resp.data)
         setVendors(resp.data)
       })
       .catch((error) => {
+        setIfLoader(false)
         console.log(error)
+        toast.error(error.message)
       })
   }, [token, baseUrl, fetchUserId, showModal])
 
@@ -71,6 +82,10 @@ const VendorMaster = () => {
     <div className="main-container">
       <Sidebar />
       <div className="content">
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
         <div className="content-wrapper">
 
           <div className={showModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>

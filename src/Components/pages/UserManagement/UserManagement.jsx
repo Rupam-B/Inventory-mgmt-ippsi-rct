@@ -4,6 +4,7 @@ import '../../css/root.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { environment } from '../../environment'
+import Loader from '../Loader'
 
 const UserManagement = () => {
     // const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
@@ -13,10 +14,14 @@ const UserManagement = () => {
 
     const [usersData , setUsersData] = useState([])
 
+    
+    const [ifLoader, setIfLoader] = useState(false)
+
 
 
 
     useEffect(()=>{
+        setIfLoader(true)
         axios.get( `${baseUrl}/users` , {
             headers:{
                 'Content-Type':'application/json',
@@ -24,10 +29,12 @@ const UserManagement = () => {
             }
         })
         .then(resp =>{
+            setIfLoader(false)
             console.log(resp.data)
             setUsersData(resp.data)
         })
         .catch(err=>{
+            setIfLoader(false)
             console.log(err)
         })
     },[baseUrl,token])
@@ -57,6 +64,10 @@ const UserManagement = () => {
 
 
         <div className="content">
+        {
+          ifLoader ?
+            <Loader /> : ''
+        }
       <div  className="content-wrapper">
 
     <h1 style={{textAlign:'left'}}>Users</h1>

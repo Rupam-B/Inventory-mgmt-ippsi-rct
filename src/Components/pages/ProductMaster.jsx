@@ -5,6 +5,7 @@ import Sidebar from '../sidebar/Sidebar'
 import axios from 'axios'
 import { environment } from '../environment'
 import { Link } from 'react-router-dom'
+import Loader from './Loader'
 
 const ProductMaster = () => {
 
@@ -14,6 +15,7 @@ const ProductMaster = () => {
   const token = localStorage.getItem('ipssi_Jwt')
 
   const [userStocks , setUserStocks] = useState([])
+  const [ifLoader, setIfLoader] = useState(false)
 //   const [askQuantity , setAskQuantity] = useState(0)
 
 //   const [showModal , setShowModal] = useState(false)
@@ -69,7 +71,7 @@ const ProductMaster = () => {
   const DeleteDeviceFunc = (proId) => {
 
     const confirmDelete = window.confirm("Are you sure you want to delete this product?");
-    
+    setIfLoader(true)
  
     if (confirmDelete) {
       axios.delete(`${baseUrl}/api/product-master/delete/${proId}`, {
@@ -79,10 +81,12 @@ const ProductMaster = () => {
         }
       })
       .then(resp => {
+        setIfLoader(false)
         alert(resp.data); 
         setReload(!reload)
       })
       .catch(err => {
+        setIfLoader(false)
         console.log(err);
       });
     } else {
@@ -95,6 +99,7 @@ const ProductMaster = () => {
 
 
   useEffect(()=>{
+    setIfLoader(true)
     axios.get(`${baseUrl}/api/product-master/all`, {
         headers:{
           "Content-Type":"application/json",
@@ -104,9 +109,11 @@ const ProductMaster = () => {
   )
   .then((resp)=>{
     // console.log(resp.data)
+    setIfLoader(false)
     setUserStocks(resp.data)
   })
   .catch((error)=>{
+    setIfLoader(false)
     console.log(error)
   })
   },[token,baseUrl,fetchUserId,reload])
@@ -116,6 +123,10 @@ const ProductMaster = () => {
     <div  className="main-container">
         <Sidebar />
         <div className="content">
+        {
+          ifLoader ?
+            <Loader /> : ''
+        }
       <div  className="content-wrapper">
 
 

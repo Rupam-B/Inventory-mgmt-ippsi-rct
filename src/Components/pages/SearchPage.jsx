@@ -4,11 +4,14 @@ import axios from 'axios';
 import { environment } from '../environment';
 import '../css/SearchPage.css'
 import { toast } from 'react-toastify'
+import Loader from './Loader';
 
 const SearchPage = () => {
 
     const baseUrl = environment.baseUrl
     const token = localStorage.getItem('ipssi_Jwt')
+
+    const [ifLoader, setIfLoader] = useState(false)
 
     // const [userStocks, setUserStocks] = useState();
     const [userStocks, setUserStocks] = useState([]);
@@ -18,6 +21,7 @@ const SearchPage = () => {
 
     const handleSearch =()=>{
         if(searchtext){
+          setIfLoader(true)
             setLoader(true)
             axios.get(`${baseUrl}/api/stocks/search-stock/${searchtext}`,{
                 headers:{
@@ -27,12 +31,14 @@ const SearchPage = () => {
             })
             .then(resp=>{
                 // console.log(resp.data);
+                setIfLoader(false)
                 setUserStocks(resp.data)
                 setTimeout(()=>{
                     setLoader(false)
                 },1000)
             })
             .catch(err=>{
+              setIfLoader(false)
                 console.log(err)
                 toast.error("Device Not Found")
                 setLoader(false)
@@ -54,6 +60,12 @@ const SearchPage = () => {
     <div  className="main-container">
     <Sidebar />
     <div className="content">
+      {/* -----------Loader----------- */}
+
+      {
+          ifLoader ?
+            <Loader /> : ''
+        }
   <div  className="content-wrapper">
 
 <h1 style={{textAlign:'left'}}>Search</h1>
