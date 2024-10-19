@@ -14,6 +14,8 @@ const Sidebar = () => {
     // const [submenu5Open, setSubmenu5Open] = useState(false);
     const [userName, setUserName] = useState(false);
 
+    const [isMobile , setIsMobile] = useState(false)
+
     const toggleDisplay = () => {
         setDisplayStatus(!displayStatus);
     };
@@ -47,15 +49,35 @@ const Sidebar = () => {
         setUserName( localStorage.getItem("ipssi_userName"))
     },[])
 
+
+        // Set isMobile based on screen size
+        useEffect(() => {
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 500);
+            };
+    
+            
+            handleResize();
+    
+            
+            window.addEventListener('resize', handleResize);
+    
+            
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }, []);
+    
+
     return (
         <div>
-            <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div style={{position:'fixed', width:'0',paddingRight:'30px'}} className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div  className={displayStatus ? 'sidebar' : 'sidebar-hide'}>
                     <button onClick={toggleDisplay} className={displayStatus ? 'sidebar-close-btn' : 'sidebar-show-btn-disp-none'}>
                         <i className="fa-solid fa-angle-left"></i>
                     </button>
                     <button onClick={toggleDisplay} className={displayStatus ? 'sidebar-show-btn-disp-none' : 'sidebar-show-btn'}>
-                        <i className="fa-solid fa-angle-right"></i>
+                        <i className={isMobile?"fa-solid fa-bars":"fa-solid fa-angle-right"}></i>
                     </button>
                     <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                         <Link   className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">

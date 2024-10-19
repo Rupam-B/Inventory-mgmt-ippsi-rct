@@ -20,7 +20,7 @@
     position: fixed;
     overflow: hidden;
     z-index: 2;
-    transition: width 0.3s ease; /* Smooth transition for toggle */
+    transition: width 0.3s ease; 
 }
 
 .sidebar-hide {
@@ -28,7 +28,7 @@
     width: 0;
     min-width: 0;
     overflow: hidden;
-    transition: width 0.3s ease; /* Smooth transition for toggle */
+    transition: width 0.3s ease; 
 }
 
 .sidebar-close-btn {
@@ -84,6 +84,8 @@
     .sidebar-show-btn {
         left: 5px;
         top: 5px;
+        color: black;
+        position: fixed;
     }
 
     .drop-down-link {

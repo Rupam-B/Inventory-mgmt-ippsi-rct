@@ -8,15 +8,21 @@
    width: 20%;
 }
 
+
 @media screen and (max-width:500px) {
     .main-container{
         display: flex;
         width:99vw;
         overflow: scroll;
         padding-right: 10px;
+        
         /* border: 1px solid red; */
     
     }
+    .content{
+        margin-left: 10px;
+    }
+    
     .model-master-table{
         margin-top: 40px;
         width: 80%;

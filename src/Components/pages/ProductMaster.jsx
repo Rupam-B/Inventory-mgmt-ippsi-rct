@@ -175,7 +175,7 @@ const ProductMaster = () => {
         <th scope="col">Device Name</th>
         <th scope="col">Vendor</th>
         <th scope="col">Category</th>
-        <th scope="col">Purchase Date</th>
+        {/* <th scope="col">Purchase Date</th> */}
         <th scope="col"></th>
         <th scope="col"></th>
         {/* <th scope="col"></th> */}
