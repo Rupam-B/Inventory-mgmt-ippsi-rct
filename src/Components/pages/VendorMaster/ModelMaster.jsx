@@ -158,7 +158,7 @@ const ModelMaster = () => {
           <br />
           <br />
 
-          <Link onClick={showModalFunc} className='New-Order-button btn btn-primary' style={{ position: 'absolute', right: '20px', top: '100px' }}>Add Models</Link>
+          <Link onClick={showModalFunc}  className='New-Order-button btn btn-primary' >Add Models</Link>
 
           <div className="Home-table">
 

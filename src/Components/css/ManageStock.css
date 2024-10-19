@@ -14,10 +14,16 @@
     margin: auto;
 }
 .New-Order-button{
-    position:'absolute';
-    right:'20px';
-    top:'100px';
-    /* background-color: red; */
+    position:absolute;
+    right: 20px;
+    top:100px;
+   
+  }
+.New-Transfer-button{
+    position:absolute;
+    right: 140px;
+    top:100px;
+   
   }
 
 
@@ -46,12 +52,20 @@
     }
 
 
-/* 
+
     @media (max-width: 500px) {
         .New-Order-button{
-            position:'absolute';
-            left:'0';
+            position:relative;
+            left: auto;
+            right:110px;
+            top:-30px;
+           
+          }
+        .New-Transfer-button{
+            position:relative;
             right: auto;
-            top:'80px'
+            left: -380px;;
+            top:-30px;
+           
+          }
         }
-        } */

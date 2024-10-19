@@ -265,8 +265,8 @@ const ManageStocks = () => {
           <br />
           <br />
 
-          <Link to={'/AddProductPage'} style={{ position: 'absolute', right: '20px', top: '100px' }} className='New-Order-button btn btn-primary'>Add Device</Link>
-          <button onClick={handleCreateTransitRequest} style={{ position: 'absolute', right: '150px', top: '100px' }} className='New-Order-button btn btn-primary'>Transfer</button>
+          <Link to={'/AddProductPage'}   className='New-Order-button btn btn-primary'>Add Device</Link>
+          <button onClick={handleCreateTransitRequest}  className='New-Transfer-button btn btn-primary'>Transfer</button>
 
           <div className="Home-table">
 
@@ -275,8 +275,8 @@ const ManageStocks = () => {
 
                 <table className="table table-striped">
                   <thead>
-                    <tr>
-                      <th scope="col">S</th>
+                    <tr >
+                      <th  scope="col">S</th>
                       <th scope="col">P.Id</th>
                       <th scope="col">Product Name</th>
                       <th scope="col">Serial No.</th>

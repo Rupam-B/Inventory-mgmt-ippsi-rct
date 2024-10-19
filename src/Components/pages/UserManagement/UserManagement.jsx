@@ -16,6 +16,7 @@ const UserManagement = () => {
 
     
     const [ifLoader, setIfLoader] = useState(false)
+    const [isMobile , setIsMobile] = useState(false)
 
 
 
@@ -55,6 +56,25 @@ const UserManagement = () => {
                 console.log(err);
             });
         };
+
+        
+        // Set isMobile based on screen size
+        useEffect(() => {
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 500);
+            };
+    
+            
+            handleResize();
+    
+            
+            window.addEventListener('resize', handleResize);
+    
+            
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }, []);
     
 
 
@@ -74,7 +94,7 @@ const UserManagement = () => {
     <br/>
     <br/>
 
-    <Link to={'/AddUser'} className='New-Order-button btn btn-primary' style={{position:'absolute', right:'20px', top:'100px'}}>Add User</Link>
+    <Link to={'/AddUser'} style={{left:isMobile?'-275px':''}} className='New-Order-button btn btn-primary' >Add User</Link>
 
     <div className="Home-table">
 
@@ -106,7 +126,7 @@ const UserManagement = () => {
      
         
         <td><Link to={`/EditUser/${users.userId}`} className="btn btn-warning">Edit</Link></td>
-        <td><button onClick={()=>DeleteUser(users.userId)} type="button" className="btn btn-danger">Remove From List</button></td>
+        <td><button onClick={()=>DeleteUser(users.userId)} type="button" className="btn btn-danger">Remove</button></td>
       </tr>
             ))
         }

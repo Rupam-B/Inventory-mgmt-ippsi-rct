@@ -109,7 +109,7 @@ const ReceiveStocksPage = () => {
                           <td>{stocks.sourceUser.userName}</td>
                           <td>{stocks.productPurchaseDate}</td>
                           <td className="prod-desc-tab">{stocks.productMaster.productVendor}</td>
-                          <td><button onClick={()=>markAsReceived(stocks.transferId)} className="btn btn-success" >Mark as Received</button></td>
+                          <td><button style={{width:'150px'}} onClick={()=>markAsReceived(stocks.transferId)} className="btn btn-success" >Mark as Received</button></td>
                           {/* <td><button  className="btn btn-danger">Delete</button></td> */}
                         </tr>
                       ))

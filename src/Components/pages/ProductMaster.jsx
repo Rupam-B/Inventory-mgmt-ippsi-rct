@@ -26,6 +26,7 @@ const ProductMaster = () => {
 
 
   const[reload, setReload] = useState(false)
+  const [isMobile , setIsMobile] = useState(false)
 
     
 //   const showModalFunc = (proId,proQty) => {
@@ -119,6 +120,27 @@ const ProductMaster = () => {
   },[token,baseUrl,fetchUserId,reload])
 
 
+
+  
+        // Set isMobile based on screen size
+        useEffect(() => {
+          const handleResize = () => {
+              setIsMobile(window.innerWidth < 500);
+          };
+  
+          
+          handleResize();
+  
+          
+          window.addEventListener('resize', handleResize);
+  
+          
+          return () => {
+              window.removeEventListener('resize', handleResize);
+          };
+      }, []);
+
+
   return (
     <div  className="main-container">
         <Sidebar />
@@ -161,7 +183,7 @@ const ProductMaster = () => {
     <br/>
     <br/>
 
-    <Link to={'/AddDevicePage'} style={{position:'absolute', right:'20px', top:'100px'}} className='New-Order-button btn btn-primary'>Add Device</Link>
+    <Link to={'/AddDevicePage'} style={{left:isMobile?'-140px':''}} className='New-Order-button btn btn-primary'>Add Device</Link>
 
 <div  className="Home-table">
 

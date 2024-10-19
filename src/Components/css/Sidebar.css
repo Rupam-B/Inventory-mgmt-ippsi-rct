@@ -19,7 +19,7 @@
     overflow-y: auto; 
     position: fixed;
     overflow: hidden;
-    z-index: 2;
+    z-index: 5;
     transition: width 0.3s ease; 
 }
 
@@ -29,6 +29,12 @@
     min-width: 0;
     overflow: hidden;
     transition: width 0.3s ease; 
+}
+
+.fixing-position-sidebar{
+    position:fixed;
+     width:0;
+     z-index: 5;
 }
 
 .sidebar-close-btn {
@@ -66,6 +72,10 @@
         overflow-y: auto;
         transition: width 0.3s ease; /* Smooth transition for toggle */
     }
+    .fixing-position-sidebar{
+        position:absolute;
+         width:auto;
+    }
 
     .sidebar-hide {
         max-width: 0;
@@ -74,6 +84,12 @@
         height: 100vh; /* Ensure it still covers the screen height */
         overflow: hidden;
         transition: width 0.3s ease; /* Smooth transition for toggle */
+    }
+
+    .sidebar-padding{
+        padding-top: 20px;
+        padding-left: 20px;
+        font-size: 24px;
     }
 
     .sidebar-close-btn {
@@ -93,7 +109,8 @@
     }
 
     .nav-link {
-        font-size: 16px; /* Adjust font size for better readability */
+        font-size: 22px;
+        margin-bottom: 15px; /* Adjust font size for better readability */
     }
 
     .dropdown-toggle {

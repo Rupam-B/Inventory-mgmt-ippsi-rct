@@ -122,7 +122,7 @@ const VendorMaster = () => {
           <br />
           <br />
 
-          <button onClick={showModalFunc} className='New-Order-button btn btn-primary' style={{ position: 'absolute', right: '20px', top: '100px' }}>Add Vendor</button>
+          <button onClick={showModalFunc}  className='New-Order-button btn btn-primary' >Add Vendor</button>
 
           <div className="Home-table">
 

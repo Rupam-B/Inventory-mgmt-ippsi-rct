@@ -71,19 +71,19 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div style={{position:'fixed', width:'0',paddingRight:'30px'}} className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div  className={displayStatus ? 'sidebar' : 'sidebar-hide'}>
+            <div  className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark fixing-position-sidebar">
+                <div className={displayStatus ? 'sidebar' : 'sidebar-hide'}>
                     <button onClick={toggleDisplay} className={displayStatus ? 'sidebar-close-btn' : 'sidebar-show-btn-disp-none'}>
                         <i className="fa-solid fa-angle-left"></i>
                     </button>
                     <button onClick={toggleDisplay} className={displayStatus ? 'sidebar-show-btn-disp-none' : 'sidebar-show-btn'}>
                         <i className={isMobile?"fa-solid fa-bars":"fa-solid fa-angle-right"}></i>
                     </button>
-                    <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <Link   className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <div className="d-flex flex-column  align-items-sm-start px-3 pt-2 text-white min-vh-100 sidebar-padding">
+                        <Link   className="d-flex  pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <span className="fs-5  d-sm-inline">Menu</span>
                         </Link>
-                        <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <ul className="nav nav-pills flex-column mb-sm-auto mb-0  align-items-sm-start" id="menu">
                             <li>
                                 <div onClick={toggleSubmenu1} className="nav-link px-0 align-middle text-white fw-bold">
                                     <i className="fs-4 bi-speedometer2"></i> <span className="ms-1  d-sm-inline">Dashboard</span>
