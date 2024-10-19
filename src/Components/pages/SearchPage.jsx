@@ -101,7 +101,7 @@ userStocks?
 <tbody>
   <tr>
 
-    <th scope="row">{userStocks.stockId}</th>
+    <td>{userStocks.stockId}</td>
     <td>{userStocks.productModel}</td>
     <td>{userStocks.serialNumber}</td>
     <td>{userStocks.deviceStatus}</td>

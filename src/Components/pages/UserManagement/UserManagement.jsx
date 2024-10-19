@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../sidebar/Sidebar'
 import '../../css/root.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { environment } from '../../environment'
 import Loader from '../Loader'
@@ -10,7 +10,7 @@ const UserManagement = () => {
     // const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
     const baseUrl = environment.baseUrl
     const token = localStorage.getItem('ipssi_Jwt')
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [usersData , setUsersData] = useState([])
 
@@ -40,22 +40,22 @@ const UserManagement = () => {
         })
     },[baseUrl,token])
 
-    const DeleteUser = (delId) => {
+    // const DeleteUser = (delId) => {
 
-            axios.delete(`${baseUrl}/delUser/${delId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            .then(resp => {
-                alert("Successfully Deleted");
-                navigate('/Users');
-            })
-            .catch(err => {
-                console.log(err);
-            });
-        };
+    //         axios.delete(`${baseUrl}/delUser/${delId}`, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         })
+    //         .then(resp => {
+    //             alert("Successfully Deleted");
+    //             navigate('/Users');
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    //     };
 
         
         // Set isMobile based on screen size
@@ -108,8 +108,8 @@ const UserManagement = () => {
         {/* <!-- <th scope="col">Price</th> --> */}
         <th scope="col">User Password</th>
         
-        <th scope="col"></th>
-        <th scope="col"></th>
+        {/* <th scope="col"></th> */}
+        {/* <th scope="col"></th> */}
         
       </tr>
     </thead>
@@ -125,8 +125,8 @@ const UserManagement = () => {
         <td className="prod-desc-tab" style={{width:'150px' , overflowX:'scroll'}}>{users.password}</td>
      
         
-        <td><Link to={`/EditUser/${users.userId}`} className="btn btn-warning">Edit</Link></td>
-        <td><button onClick={()=>DeleteUser(users.userId)} type="button" className="btn btn-danger">Remove</button></td>
+        {/* <td><Link to={`/EditUser/${users.userId}`} className="btn btn-warning">Edit</Link></td> */}
+        {/* <td><button onClick={()=>DeleteUser(users.userId)} type="button" className="btn btn-danger">Remove</button></td> */}
       </tr>
             ))
         }

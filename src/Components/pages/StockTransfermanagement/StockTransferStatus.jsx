@@ -95,7 +95,7 @@ const StockTransferStatus = () => {
                     {
                       userStocks.map((stocks) => (
                         <tr key={stocks.transferId}>
-                          <th scope="row">{stocks.transferId}</th>
+                          <td>{stocks.transferId}</td>
                           <td>{stocks.productMaster.productModel}</td>
                           <td>{stocks.serialNumber}</td>
                           <td>

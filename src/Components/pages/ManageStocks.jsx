@@ -116,6 +116,8 @@ const ManageStocks = () => {
       .catch(err => {
         console.log(err);
         setShowModal(false);
+        toast.error("Sorry! Service will be available soon")
+
       });
   };
 
@@ -141,6 +143,7 @@ const ManageStocks = () => {
         .catch(err => {
           setIfLoader(false)
           console.log(err);
+          toast.error("Sorry! Service will be available soon")
         });
     } else {
 
@@ -300,7 +303,7 @@ const ManageStocks = () => {
                               onChange={() => handleSelectDevice(stocks.serialNumber)}
                             />
                           </td>
-                          <th scope="row">{stocks.productId}</th>
+                          <td>{stocks.productId}</td>
                           <td>{stocks.productModel}</td>
                           <td>{stocks.serialNumber}</td>
                           <td>{stocks.deviceStatus}</td>

@@ -146,7 +146,7 @@ const VendorMaster = () => {
                     {
                       vendors.map((stocks) => (
                         <tr key={stocks.vendorId}>
-                          <th scope="row">{stocks.vendorId}</th>
+                          <td >{stocks.vendorId}</td>
                           <td>{stocks.vendorName}</td>
                           <td>{stocks.vendorAddress}</td>
                           <td>{stocks.vendorMobile}</td>

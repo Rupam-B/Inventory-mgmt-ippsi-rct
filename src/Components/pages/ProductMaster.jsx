@@ -25,7 +25,7 @@ const ProductMaster = () => {
 //   const[presntProQty, setPresentProQty] = useState()
 
 
-  const[reload, setReload] = useState(false)
+  // const[reload, setReload] = useState(false)
   const [isMobile , setIsMobile] = useState(false)
 
     
@@ -69,32 +69,32 @@ const ProductMaster = () => {
 //   };
   
 
-  const DeleteDeviceFunc = (proId) => {
+  // const DeleteDeviceFunc = (proId) => {
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
-    setIfLoader(true)
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+  //   setIfLoader(true)
  
-    if (confirmDelete) {
-      axios.delete(`${baseUrl}/api/product-master/delete/${proId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(resp => {
-        setIfLoader(false)
-        alert(resp.data); 
-        setReload(!reload)
-      })
-      .catch(err => {
-        setIfLoader(false)
-        console.log(err);
-      });
-    } else {
+  //   if (confirmDelete) {
+  //     axios.delete(`${baseUrl}/api/product-master/delete/${proId}`, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     })
+  //     .then(resp => {
+  //       setIfLoader(false)
+  //       alert(resp.data); 
+  //       setReload(!reload)
+  //     })
+  //     .catch(err => {
+  //       setIfLoader(false)
+  //       console.log(err);
+  //     });
+  //   } else {
       
-      console.log("Deletion canceled by the user.");
-    }
-  };
+  //     console.log("Deletion canceled by the user.");
+  //   }
+  // };
   
 
 
@@ -117,7 +117,7 @@ const ProductMaster = () => {
     setIfLoader(false)
     console.log(error)
   })
-  },[token,baseUrl,fetchUserId,reload])
+  },[token,baseUrl,fetchUserId])
 
 
 
@@ -199,7 +199,7 @@ const ProductMaster = () => {
         <th scope="col">Category</th>
         {/* <th scope="col">Purchase Date</th> */}
         <th scope="col"></th>
-        <th scope="col"></th>
+        {/* <th scope="col"></th> */}
         {/* <th scope="col"></th> */}
       </tr>
     </thead>
@@ -207,13 +207,13 @@ const ProductMaster = () => {
       {
         userStocks.map((stocks)=>(
           <tr key={stocks.productId}>
-        <th scope="row">{stocks.productId}</th>
+        <td>{stocks.productId}</td>
         <td>{stocks.productModel}</td>
         <td>{stocks.productVendor}</td>
         <td>{stocks.productCategory}</td>
         <td>{stocks.productPurchaseDate}</td>
         {/* <td><button onClick={()=>showModalFunc(stocks.productId,stocks.quantity)}  className="btn btn-warning" >Edit</button></td> */}
-        <td><button onClick={()=>DeleteDeviceFunc(stocks.productId)}   className="btn btn-danger">Delete</button></td>
+        {/* <td><button onClick={()=>DeleteDeviceFunc(stocks.productId)}   className="btn btn-danger">Delete</button></td> */}
         {/* <td><button  className="btn btn-success">Full Details</button></td> */}
       </tr>
         ))
