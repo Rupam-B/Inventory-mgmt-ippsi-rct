@@ -16,6 +16,10 @@ th{
     background-color: #fcdca6 !important;
 }
 
+table{
+    margin-top: 50px;
+}
+
 @media screen and (max-width:500px) {
     .main-container{
         display: flex;

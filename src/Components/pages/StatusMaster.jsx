@@ -118,8 +118,10 @@ const StatusMaster = () => {
           <h1 style={{ textAlign: 'left' }}>Status</h1>
           <br />
           <br />
-
+          
+          <div className='Functional-Buttons'>
           <button onClick={showModalFunc} className='New-Order-button btn btn-primary' >Add Status</button>
+          </div>
 
           <div className="Home-table">
 

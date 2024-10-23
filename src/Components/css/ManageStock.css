@@ -13,18 +13,28 @@
     width: 90vw;
     margin: auto;
 }
-.New-Order-button{
+/* .New-Order-button{
     position:absolute;
     right: 20px;
     top:100px;
    
-  }
-.New-Transfer-button{
+  } */
+/* .New-Transfer-button{
     position:absolute;
     right: 140px;
     top:100px;
    
-  }
+  } */
+
+    .Functional-Buttons{
+      /* border: 1px solid red; */
+      display: flex;
+      width: 20%;
+      position: absolute;
+      right: 20px;
+      top: 100px;
+      justify-content: flex-end;
+    }
 
 
 
@@ -54,7 +64,7 @@
 
 
     @media (max-width: 500px) {
-        .New-Order-button{
+        /* .New-Order-button{
             position:relative;
             left: auto;
             right:110px;
@@ -67,5 +77,19 @@
             left: -380px;;
             top:-30px;
            
+          } */
+
+          .Functional-Buttons{
+            /* border: 1px solid red; */
+            display: flex;
+            width: 230px;
+            position: relative;
+            right: auto;
+            left: 0;
+            top: 0;
+            justify-content: space-between;
+          }
+          .manage-stock-select{
+            margin-top: 30px;
           }
         }

@@ -121,8 +121,9 @@ const VendorMaster = () => {
           <h1 style={{ textAlign: 'left' }}>Vendors</h1>
           <br />
           <br />
-
+          <div className='Functional-Buttons'>
           <button onClick={showModalFunc}  className='New-Order-button btn btn-primary' >Add Vendor</button>
+          </div>
 
           <div className="Home-table">
 

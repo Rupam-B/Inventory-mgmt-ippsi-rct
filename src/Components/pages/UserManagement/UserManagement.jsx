@@ -93,8 +93,10 @@ const UserManagement = () => {
     <h1 style={{textAlign:'left'}}>Users</h1>
     <br/>
     <br/>
-
+    
+    <div className='Functional-Buttons'>
     <Link to={'/AddUser'} style={{left:isMobile?'-275px':''}} className='New-Order-button btn btn-primary' >Add User</Link>
+    </div>
 
     <div className="Home-table">
 

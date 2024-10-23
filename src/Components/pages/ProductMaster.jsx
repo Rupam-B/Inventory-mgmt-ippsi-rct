@@ -183,7 +183,10 @@ const ProductMaster = () => {
     <br/>
     <br/>
 
+
+    <div className='Functional-Buttons'>
     <Link to={'/AddDevicePage'} style={{left:isMobile?'-140px':''}} className='New-Order-button btn btn-primary'>Add Device</Link>
+    </div>
 
 <div  className="Home-table">
 

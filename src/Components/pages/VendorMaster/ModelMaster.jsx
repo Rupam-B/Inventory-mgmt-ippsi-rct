@@ -157,8 +157,9 @@ const ModelMaster = () => {
           <h1 style={{ textAlign: 'left', marginBottom: '30px' }}>Vendor Models</h1>
           <br />
           <br />
-
+          <div className='Functional-Buttons'>
           <Link onClick={showModalFunc}  className='New-Order-button btn btn-primary' >Add Models</Link>
+          </div>
 
           <div className="Home-table">
 

@@ -112,7 +112,9 @@ const CategoryMaster = () => {
           <br />
           <br />
 
+          <div className='Functional-Buttons'>
           <button onClick={showModalFunc} className='New-Order-button btn btn-primary' >Add Category</button>
+          </div>
 
           <div className="Home-table">
 

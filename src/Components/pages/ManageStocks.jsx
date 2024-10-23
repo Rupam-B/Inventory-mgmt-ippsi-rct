@@ -342,14 +342,15 @@ const ManageStocks = () => {
           <h1 style={{ textAlign: 'left' }}>Manage Stock</h1>
           <br />
           <br />
-
-          <Link to={'/AddProductPage'} className='New-Order-button btn btn-primary'>Add Device</Link>
+          <div className='Functional-Buttons'>
+          <Link to={'/AddProductPage'} style={{marginRight:'10px'}} className='New-Order-button btn btn-primary'>Add Device</Link>
           <button onClick={handleCreateTransitRequest} className='New-Transfer-button btn btn-primary'>Transfer</button>
+          </div>
 
           <div className="Home-table">
             {/* <div className='card'> */}
 
-            <div style={{width:'50%',textAlign:'left'}} data-mdb-input-init className="form-outline mb-3">
+            <div style={{width:'50%',textAlign:'left'}} data-mdb-input-init className="form-outline mb-3 manage-stock-select">
               {/* <label style={{marginLeft:'5px'}} className="form-label fw-bold" htmlFor="form3Example3cg">Choose Status</label> */}
               <select
                 style={{ width: '60%' }}
