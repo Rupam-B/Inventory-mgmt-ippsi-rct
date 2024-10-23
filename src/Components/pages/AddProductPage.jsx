@@ -25,9 +25,12 @@ const AddProductPage = () => {
     const [productsIdselect, setProductsIdSelect] = useState(null)
     const [usersIdselect, setUsersIdSelect] = useState(null)
     const [usersData, setUsersData] = useState(null) 
-    const [deviceStatus, setDeviceStatus] = useState(null) 
+    const [deviceStatus, setDeviceStatus] = useState([]) 
+    const [deviceStatusId, setDeviceStatusId] = useState() 
     const [prodDate, setProdDate] = useState(null) 
     const [serialNumber, setSerialNumber] = useState(null) 
+
+    const [devicedescription, setDeviceDescription] = useState()
 
 
     // const findVendorname = findvendorForName?file.vendorName:null
@@ -77,13 +80,15 @@ const AddProductPage = () => {
 
 
     const AddProduct = () => {
-
+        if(usersIdselect&&productsIdselect&&serialNumber&&deviceStatusId&&devicedescription&&prodDate){
         setIfLoader(true)
+        console.log(deviceStatusId, "device id")
         axios.post(`${baseUrl}/api/stocks/add`, {
             usersId: usersIdselect,
             productId: productsIdselect,
             serialNumber: serialNumber,
-            deviceStatus: deviceStatus,
+            statusId:parseInt(deviceStatusId),
+            description:devicedescription,
             productPurchaseDate: prodDate
         },
             {
@@ -104,6 +109,10 @@ const AddProductPage = () => {
                 console.log(err)
                 toast.error(err.message + "or wrong Data Entry")
             })
+        }
+        else{
+            toast.error("please Fill all Details and Add")
+        }
     }
 
 
@@ -168,6 +177,28 @@ const uploadProductsFromExcel = () => {
 
     reader.readAsArrayBuffer(file);
 };
+
+
+
+
+useEffect(() => {
+    axios.get(`${baseUrl}/allDeviceStatus`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(resp => {
+        // console.log(resp.data)
+        setDeviceStatus(resp.data)
+        
+      })
+      .catch(err => {
+        console.log(err)
+        toast.error(err.message)
+      })
+  }, [baseUrl, token])
+
 
 
 
@@ -263,8 +294,33 @@ const uploadProductsFromExcel = () => {
                                                 </div>
 
                                                 <div data-mdb-input-init className="form-outline mb-3">
-                                                    <label className="form-label fw-bold" htmlFor="form3Example4cg">Device Status</label>
-                                                    <input onChange={(e) => setDeviceStatus(e.target.value)} type="text" id="form3Example4cg" className="form-control form-control-md" name="ProductCategory" />
+                                                    <label className="form-label fw-bold" htmlFor="form3Example3cg">Choose Status</label>
+                                                    <select
+                                                        style={{ width: '60%' }}
+                                                        onChange={(e) => setDeviceStatusId(e.target.value)}
+                                                        className='form-control form-control-md'
+                                                        name="vendorSelect"
+                                                        id=""
+                                                    >
+                                                        {/* Placeholder option */}
+                                                        <option value="">Select Status</option>
+
+                                                        {deviceStatus&&deviceStatus.length > 0 ? (
+                                                            deviceStatus.map((vens) => (
+                                                                <option key={vens.statusID} value={vens.statusID}>
+                                                                    {vens.status}
+                                                                </option>
+                                                            ))
+                                                        ) : (
+                                                            <option value="">No Status Available</option>
+                                                        )}
+                                                    </select>
+
+
+                                                </div>
+                                                <div data-mdb-input-init className="form-outline mb-3">
+                                                    <label className="form-label fw-bold" htmlFor="form3Example3cg">Description</label>
+                                                    <input className="form-control form-control-md" type="text" onChange={(e)=>setDeviceDescription(e.target.value)} />
                                                 </div>
 
                                                 <div data-mdb-input-init className="form-outline mb-4">

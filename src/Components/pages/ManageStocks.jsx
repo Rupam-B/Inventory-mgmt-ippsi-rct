@@ -30,6 +30,12 @@ const ManageStocks = () => {
   const [presntProId, setPresentProId] = useState()
   const [presntProQty, setPresentProQty] = useState()
 
+  const [deviceStatus, setDeviceStatus] = useState([]) 
+  const [deviceStatusId, setDeviceStatusId] = useState(0) 
+
+  const statuskey = deviceStatusId&&parseInt(deviceStatusId)
+
+
 
   const [reload, setReload] = useState(false)
 
@@ -154,25 +160,25 @@ const ManageStocks = () => {
 
 
 
-  useEffect(() => {
-    setIfLoader(true)
-    axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      }
-    }
-    )
-      .then((resp) => {
-        setIfLoader(false)
-        // console.log(resp.data)
-        setUserStocks(resp.data)
-      })
-      .catch((error) => {
-        setIfLoader(false)
-        console.log(error)
-      })
-  }, [token, baseUrl, fetchUserId, showModal, reload])
+  // useEffect(() => {
+  //   setIfLoader(true)
+  //   axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   }
+  //   )
+  //     .then((resp) => {
+  //       setIfLoader(false)
+  //       // console.log(resp.data)
+  //       setUserStocks(resp.data)
+  //     })
+  //     .catch((error) => {
+  //       setIfLoader(false)
+  //       console.log(error)
+  //     })
+  // }, [token, baseUrl, fetchUserId, showModal, reload])
 
 
   // console.log(addOrSub)
@@ -194,6 +200,75 @@ const ManageStocks = () => {
         console.log(err)
       })
   }, [baseUrl, token])
+
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/allDeviceStatus`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(resp => {
+        // console.log(resp.data)
+        setDeviceStatus(resp.data)
+        
+      })
+      .catch(err => {
+        console.log(err)
+        toast.error(err.message)
+      })
+  }, [baseUrl, token])
+
+
+  useEffect(()=>{
+    if(statuskey!==0){
+      setIfLoader(true)
+    axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}/status/${deviceStatusId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(resp => {
+        setIfLoader(false)
+      //  console.log(resp.data)
+       setUserStocks(resp.data)
+      })
+      .catch(err => {
+        setIfLoader(false)
+        console.error(err);
+        toast.error(err.message)
+      });
+    }
+      
+    else if(statuskey===0){
+        setIfLoader(true)
+        axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        }
+        )
+          .then((resp) => {
+            setIfLoader(false)
+            console.log(resp.data)
+            setUserStocks(resp.data)
+          })
+          .catch((error) => {
+            setIfLoader(false)
+            console.log(error)
+            toast.error(error.message)
+          })
+
+      }
+  },[baseUrl, fetchUserId, statuskey, token,deviceStatusId])
+
+  useEffect(()=>{
+    console.log(deviceStatusId)
+  },[deviceStatusId])
+
 
 
 
@@ -268,10 +343,39 @@ const ManageStocks = () => {
           <br />
           <br />
 
-          <Link to={'/AddProductPage'}   className='New-Order-button btn btn-primary'>Add Device</Link>
-          <button onClick={handleCreateTransitRequest}  className='New-Transfer-button btn btn-primary'>Transfer</button>
+          <Link to={'/AddProductPage'} className='New-Order-button btn btn-primary'>Add Device</Link>
+          <button onClick={handleCreateTransitRequest} className='New-Transfer-button btn btn-primary'>Transfer</button>
 
           <div className="Home-table">
+            {/* <div className='card'> */}
+
+            <div style={{width:'50%',textAlign:'left'}} data-mdb-input-init className="form-outline mb-3">
+              {/* <label style={{marginLeft:'5px'}} className="form-label fw-bold" htmlFor="form3Example3cg">Choose Status</label> */}
+              <select
+                style={{ width: '60%' }}
+                onChange={(e) => setDeviceStatusId(e.target.value)}
+                className='form-control form-control-md'
+                name="vendorSelect"
+                id=""
+              >
+                {/* Placeholder option */}
+                <option value={0}>All</option>
+
+                {deviceStatus && deviceStatus.length > 0 ? (
+                  deviceStatus.map((vens) => (
+                    <option key={vens.statusID} value={vens.statusID}>
+                      {vens.status}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">No Status Available</option>
+                )}
+              </select>
+
+
+            </div>
+            
+            {/* </div> */}
 
             {
               userStocks.length > 0 ?
@@ -279,7 +383,7 @@ const ManageStocks = () => {
                 <table className="table table-striped">
                   <thead>
                     <tr >
-                      <th  scope="col">S</th>
+                      <th scope="col">S</th>
                       <th scope="col">P.Id</th>
                       <th scope="col">Product Name</th>
                       <th scope="col">Serial No.</th>
@@ -287,6 +391,7 @@ const ManageStocks = () => {
                       <th scope="col">Vendor</th>
                       <th scope="col">Category</th>
                       <th scope="col">Pur Date</th>
+                      <th scope="col">Description</th>
                       <th scope="col"></th>
                       <th scope="col"></th>
                       {/* <th scope="col"></th> */}
@@ -306,10 +411,11 @@ const ManageStocks = () => {
                           <td>{stocks.productId}</td>
                           <td>{stocks.productModel}</td>
                           <td>{stocks.serialNumber}</td>
-                          <td>{stocks.deviceStatus}</td>
+                          <td>{stocks.deviceStatus.status}</td>
                           <td>{stocks.productVendor}</td>
                           <td>{stocks.productCategory}</td>
                           <td className="prod-desc-tab">{stocks.productPurchaseDate}</td>
+                          <td className="prod-desc-tab">{stocks.description}</td>
                           <td><button onClick={() => showModalFunc(stocks.productId, stocks.quantity)} className="btn btn-warning" >Edit</button></td>
                           <td><button onClick={() => DeleteDeviceFunc(stocks.productId)} className="btn btn-danger">Delete</button></td>
                           {/* <td><button  className="btn btn-success">Full Details</button></td> */}

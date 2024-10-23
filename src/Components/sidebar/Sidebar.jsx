@@ -130,6 +130,12 @@ const Sidebar = () => {
                               
                             </li>
                             <li>
+                                <div  className="nav-link px-0 align-middle text-white fw-bold">
+                                <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/StatusMaster'} className='text-white'>Status Master</Link></span>
+                                </div>
+                              
+                            </li>
+                            <li>
                                 <div onClick={toggleSubmenu2} className="nav-link px-0 align-middle text-white fw-bold">
                                     <i className="fs-4 bi-bootstrap"></i> <span className="ms-1  d-sm-inline">Users</span>
                                 </div>

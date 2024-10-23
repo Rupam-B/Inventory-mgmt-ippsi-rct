@@ -16,28 +16,42 @@ const ReceiveStocksPage = () => {
 
 
   const [reload, setReload] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  
+  const [devicedescription, setDeviceDescription] = useState()
+  const [transferId, setTransferId] = useState()
 
 
-    const markAsReceived = async (transferId) => {
+
+
+    const markAsReceived = async () => {
       const confirm = window.confirm("Do you want to mark this transfer as received?");
-      if (confirm) {
+      if (confirm&&transferId&&devicedescription) {
+      if (transferId&&devicedescription) {
           try {
             setIfLoader(true)
-              await axios.put(`${baseUrl}/transfer/mark-as-received/${transferId}`,null, {
+              await axios.put(`${baseUrl}/transfer/mark-as-received/${transferId}`,devicedescription, {
                 headers: {
-                  "Content-Type": "application/json",
+                  "Content-Type": "text/plain",
                   Authorization: `Bearer ${token}`
                 }
               });
               setIfLoader(false)
               toast.success("Transfer marked as received!");
+              setShowModal(false)
               setReload(!reload)
               
           } catch (error) {
             setIfLoader(false)
               toast.error("Error receiving transfer");
+              setShowModal(false)
           }
       }
+      else{
+        toast.error("Description Needed or Not Valid Receive Id")
+      }
+    }
+      
   };
 
   useEffect(() => {
@@ -60,6 +74,11 @@ const ReceiveStocksPage = () => {
       })
   }, [token, baseUrl, fetchUserId,reload])
 
+  const openModal = (transfer)=>{
+    setShowModal(!showModal)
+    setTransferId(transfer)
+  }
+
 
 
 
@@ -74,6 +93,24 @@ const ReceiveStocksPage = () => {
             <Loader /> : ''
         }
         <div className="content-wrapper">
+
+          {/* Modal */}
+          <div className={showModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>
+            <form >
+
+              <div data-mdb-input-init className="form-outline mb-3">
+                <label className="form-label fw-bold" htmlFor="form3Example3cg">Enter Description</label>
+                <input onChange={(e) => setDeviceDescription(e.target.value)} type="text" id="form3Example3cg" className="form-control form-control-md" name="ProductDescription" />
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <button onClick={markAsReceived} type="button" data-mdb-button-init
+                  data-mdb-ripple-init className="btn btn-primary">Receive</button>
+              </div>
+
+            </form>
+          </div>
+          {/* ------- */}
 
           <h1 style={{ textAlign: 'left' }}>Receive Incoming Stocks</h1>
           <br />
@@ -109,7 +146,7 @@ const ReceiveStocksPage = () => {
                           <td>{stocks.sourceUser.userName}</td>
                           <td>{stocks.productPurchaseDate}</td>
                           <td className="prod-desc-tab">{stocks.productMaster.productVendor}</td>
-                          <td><button style={{width:'150px'}} onClick={()=>markAsReceived(stocks.transferId)} className="btn btn-success" >Mark as Received</button></td>
+                          <td><button style={{width:'150px'}} onClick={()=>openModal(stocks.transferId)} className="btn btn-success" >Mark as Received</button></td>
                           {/* <td><button  className="btn btn-danger">Delete</button></td> */}
                         </tr>
                       ))

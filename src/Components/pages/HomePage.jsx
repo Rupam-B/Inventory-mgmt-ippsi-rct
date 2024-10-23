@@ -5,6 +5,7 @@ import '../css/root.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { environment } from '../environment'
+import { toast } from 'react-toastify'
 
 
 const HomePage = () => {
@@ -15,10 +16,15 @@ const HomePage = () => {
   const token = localStorage.getItem('ipssi_Jwt')
 
   const [userStocks , setUserStocks] = useState([])
+  const [availableStatus , setAvailableStatus] = useState()
+
+  const [deviceStatusCounts, setDeviceStatusCounts] = useState([]);
+
+
   const numberOfStocks = userStocks.length?userStocks.length:0;
 
   useEffect(()=>{
-    axios.get(`${baseUrl}/products/user/${fetchUserId}`,{
+    axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`,{
       headers:{
          'Content-Type':'application/json',
           Authorization: `Bearer ${token}`
@@ -33,6 +39,60 @@ const HomePage = () => {
     }
     )
   },[baseUrl,fetchUserId,token])
+
+
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/allDeviceStatus`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(resp => {
+        // console.log(resp.data)
+        setAvailableStatus(resp.data)
+      })
+      .catch(err => {
+        console.log(err)
+        toast.error(err.message)
+      })
+  }, [baseUrl, token])
+
+
+
+  useEffect(() => {
+    if (availableStatus && availableStatus.length > 0) {
+
+      const newStatusCounts = [];
+
+      availableStatus.forEach(status => {
+        axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}/status/${status.statusID}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(resp => {
+            const devices = resp.data; 
+
+            newStatusCounts.push({
+              name: status.status,
+              count: devices.length 
+            });
+
+            setDeviceStatusCounts([...newStatusCounts]);
+          })
+          .catch(err => {
+            console.error(err);
+          });
+      });
+    }
+  }, [availableStatus, baseUrl, fetchUserId, token]);
+
+  // useEffect(()=>{
+  //   console.log(deviceStatusCounts, "Status count")
+  // },[deviceStatusCounts])
 
 
   return (
@@ -53,7 +113,8 @@ const HomePage = () => {
       <div  className="row">
 
       {/* <!-- Icon Cards--> */}
-        <div  className="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+
+      <div className="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
             <div  className="inforide">
               <div  className="row">
                 <div  className="col-lg-3 col-md-4 col-sm-4 col-4 rideone">
@@ -61,20 +122,47 @@ const HomePage = () => {
                 </div>
                 <div  className="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                   <div>
-                    <h4>Total Stocks</h4>
-                    <h2>{numberOfStocks}</h2>
+                    <h4>Total No. of Stocks</h4>
+                    <h2><br /></h2>
                   </div>
                   <hr style={{width:'80%'}}/>
                   <div>
-                    <h4>Working</h4>
-                    <h2>18</h2>
+                    {/* <h4><br /></h4> */}
+                    <h2>{numberOfStocks}</h2>
                   </div>
                 </div>
               </div>
             </div>
         </div>
 
-        <div  className="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+      {
+      availableStatus&&availableStatus.length===deviceStatusCounts.length?
+
+      deviceStatusCounts.map((stats,index)=>(
+        <div key={index} className="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+            <div  className="inforide">
+              <div  className="row">
+                <div  className="col-lg-3 col-md-4 col-sm-4 col-4 rideone">
+                    <img src="https://img.freepik.com/premium-vector/computer-screen-with-diagram-graph-it_1205884-5456.jpg?size=626&ext=jpg&ga=GA1.1.685551602.1726315012&semt=ais_hybrid" alt=''/>
+                </div>
+                <div  className="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                  <div>
+                    <h4>{stats.name}</h4>
+                    <h2><br /></h2>
+                  </div>
+                  <hr style={{width:'80%'}}/>
+                  <div>
+                    {/* <h4><br /></h4> */}
+                    <h2>{stats.count}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        ))
+        :''
+      }
+        {/* <div  className="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
             <div  className="inforide">
               <div  className="row">
                 <div  className="col-lg-3 col-md-4 col-sm-4 col-4 ridetwo">
@@ -135,7 +223,7 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-        </div>
+        </div> */}
 
     </div>
   </div>

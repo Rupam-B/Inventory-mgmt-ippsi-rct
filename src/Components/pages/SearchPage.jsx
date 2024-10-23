@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import axios from 'axios';
 import { environment } from '../environment';
@@ -14,9 +14,10 @@ const SearchPage = () => {
     const [ifLoader, setIfLoader] = useState(false)
 
     // const [userStocks, setUserStocks] = useState();
-    const [userStocks, setUserStocks] = useState([]);
+    const [userStocks, setUserStocks] = useState();
     const [searchtext, setsetSearchtext] = useState();
     const [loader, setLoader] = useState(false);
+
 
 
     const handleSearch =()=>{
@@ -49,12 +50,13 @@ const SearchPage = () => {
             alert('Please Enter Device name to Search')
         }
        
-
-    }
+      }
 
     // useEffect(()=>{
-       
-    // },[baseUrl,token,searchtext])
+    //    if(userStocks){
+    //     setDeviceStats(userStocks.deviceStatus.status)
+    //    }
+    // },[userStocks])
 
   return (
     <div  className="main-container">
@@ -71,7 +73,7 @@ const SearchPage = () => {
 <h1 style={{textAlign:'left'}}>Search</h1>
 
 <div className='Search-div-Search-component'>
-<input onChange={(e)=>setsetSearchtext(e.target.value)} className='form-control form-control-md' type="text" placeholder='Search device by name'/>
+<input onChange={(e)=>setsetSearchtext(e.target.value)} className='form-control form-control-md' type="text" placeholder='Search device by seraial no.'/>
 <button onClick={handleSearch} className='btn btn-primary'><i className="fa-solid fa-magnifying-glass"></i></button>
 </div>
 
@@ -104,7 +106,7 @@ userStocks?
     <td>{userStocks.stockId}</td>
     <td>{userStocks.productModel}</td>
     <td>{userStocks.serialNumber}</td>
-    <td>{userStocks.deviceStatus}</td>
+    <td>{userStocks.deviceStatus.status}</td>
     <td>{userStocks.productVendor}</td>
     <td  className="prod-desc-tab">{userStocks.userName}</td>
     <td  className="prod-desc-tab">{userStocks.productPurchaseDate}</td>

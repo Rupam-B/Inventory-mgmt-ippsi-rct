@@ -30,6 +30,8 @@ const AddDevicePage = () => {
     const [getVendorName, setGetVendorName] = useState()
     const [getcategoryName, setGetcategoryName] = useState()
 
+    
+
     useEffect(() => {
         const findvendorForName = vendors && vendors.find((vens) => vens.vendorId === parseInt(vendorsIdselect))
         const findvendorName = findvendorForName ? findvendorForName.vendorName : null
@@ -157,6 +159,8 @@ const AddDevicePage = () => {
     // }
 
 
+  
+
 
 
     return (
@@ -239,6 +243,7 @@ const AddDevicePage = () => {
                                                         }
                                                     </select>
                                                 </div>
+                                                
 {/* 
                                                 <div data-mdb-input-init className="form-outline mb-4">
                                                     <label className="form-label fw-bold" htmlFor="form3Example4cdg">Purchase Date</label>

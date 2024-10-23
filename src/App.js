@@ -22,6 +22,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductMaster from './Components/pages/ProductMaster';
 import AddDevicePage from './Components/pages/AddDevicePage';
+import StatusMaster from './Components/pages/StatusMaster';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path='/modelMaster' element={<ModelMaster/>}/>
         <Route path='/CategoryMaster' element={<CategoryMaster/>}/>
         <Route path='/ProductMaster' element={<ProductMaster/>}/>
+        <Route path='/StatusMaster' element={<StatusMaster/>}/>
       </Routes>
       
     </div>
