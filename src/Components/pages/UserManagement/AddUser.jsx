@@ -14,9 +14,12 @@ const AddUser = () => {
     const [userChMobile, setUserChMobile] = useState()
     const [userChPassword, setUserChPassword] = useState('')
 
+    const [ifLoader, setIfLoader] = useState(false)
+
 
 
     const AddUser = () =>{
+        setIfLoader(true)
         axios.post(`${baseUrl}/addUser`, {
             userName:userChName,
             mobile:userChMobile,
@@ -32,10 +35,12 @@ const AddUser = () => {
             // console.log(resp)
             alert("Successfully Added")
             navigate('/Users')
+            setIfLoader(false)
 
         })
         .catch(err=>{
             console.log(err)
+            setIfLoader(false)
         })
     }
 
@@ -45,6 +50,10 @@ const AddUser = () => {
             <Sidebar />
 
             <div className="content">
+            {
+          ifLoader ?
+            <Loader /> : ''
+        }
                 <div className="content-wrapper">
 
 
