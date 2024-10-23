@@ -151,7 +151,7 @@ const StatusMaster = () => {
                   </tbody>
                 </table>
                 :
-                <h1>No Status to Show</h1>
+                <h1 className='Not-available-Heading'>No Status to Show</h1>
             }
           </div>
 

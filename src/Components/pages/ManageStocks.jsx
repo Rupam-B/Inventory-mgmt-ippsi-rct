@@ -428,7 +428,7 @@ const ManageStocks = () => {
                   </tbody>
                 </table>
                 :
-                <h1>No Products To Show !</h1>
+                <h1 className='Not-available-Heading'>No Products To Show !</h1>
             }
           </div>
 

@@ -163,7 +163,7 @@ const VendorMaster = () => {
                   </tbody>
                 </table>
                 :
-                <h1>No Vendors to Show</h1>
+                <h1 className='Not-available-Heading'>No Vendors to Show</h1>
             }
           </div>
 

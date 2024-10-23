@@ -8,7 +8,7 @@ const Sidebar = () => {
 
     const [displayStatus, setDisplayStatus] = useState(false);
     const [submenu1Open, setSubmenu1Open] = useState(false);
-    const [submenu2Open, setSubmenu2Open] = useState(false);
+    // const [submenu2Open, setSubmenu2Open] = useState(false);
     const [submenu3Open, setSubmenu3Open] = useState(false);
     const [submenu4Open, setSubmenu4Open] = useState(false);
     // const [submenu5Open, setSubmenu5Open] = useState(false);
@@ -24,9 +24,9 @@ const Sidebar = () => {
         setSubmenu1Open(!submenu1Open);
     };
 
-    const toggleSubmenu2 = () => {
-        setSubmenu2Open(!submenu2Open);
-    };
+    // const toggleSubmenu2 = () => {
+    //     setSubmenu2Open(!submenu2Open);
+    // };
 
     const toggleSubmenu3 = () => {
         setSubmenu3Open(!submenu3Open);
@@ -102,11 +102,13 @@ const Sidebar = () => {
                                     </ul>
                                 )}
                             </li>
+
+                            {ipssiuserId===1&&
                             <li>
                                 <div onClick={toggleSubmenu4} className="nav-link px-0 align-middle text-white fw-bold">
                                     <i className="fs-4 bi-table"></i> <span className="ms-1 d-sm-inline">Vendor Master</span>
                                 </div>
-                                {submenu4Open && (
+                                {submenu4Open &&(
                                     <ul className="nav flex-column ms-1">
                                         <li>
                                             <Link to={'/vendorMaster'}className="nav-link px-0  fw-bold drop-down-link">Vendor M</Link>
@@ -117,39 +119,45 @@ const Sidebar = () => {
                                     </ul>
                                 )}
                             </li>
-                            <li>
+                            }
+
+                            
+                            {ipssiuserId===1 &&<li>
                                 <div  className="nav-link px-0 align-middle text-white fw-bold">
                                 <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/CategoryMaster'} className='text-white'>Category Master</Link></span>
                                 </div>
                               
                             </li>
+                            }
+
+                            {ipssiuserId===1 &&
                             <li>
                                 <div  className="nav-link px-0 align-middle text-white fw-bold">
                                 <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/ProductMaster'} className='text-white'>Product Master</Link></span>
                                 </div>
                               
                             </li>
+                            }
+
+                            {ipssiuserId===1 &&
                             <li>
                                 <div  className="nav-link px-0 align-middle text-white fw-bold">
                                 <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/StatusMaster'} className='text-white'>Status Master</Link></span>
                                 </div>
                               
                             </li>
+                            }
+
+                            {ipssiuserId===1 &&
                             <li>
-                                <div onClick={toggleSubmenu2} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-bootstrap"></i> <span className="ms-1  d-sm-inline">Users</span>
+                                <div  className="nav-link px-0 align-middle text-white fw-bold">
+                                <i className="fs-4 bi-table"></i> <span className="ms-1  d-sm-inline"><Link to={'/Users'} className='text-white'>Users</Link></span>
                                 </div>
-                                {submenu2Open && ipssiuserId===1 && (
-                                    <ul className="nav flex-column ms-1">
-                                         <li className="w-100">
-                                            <Link to={'/Users'} className="nav-link px-0 drop-down-link fw-bold">User List</Link>
-                                        </li>
-                                        {/* <li>
-                                            <Link className="nav-link px-0 drop-down-link fw-bold">Item 2</Link>
-                                        </li>  */}
-                                    </ul>
-                                )}
+                              
                             </li>
+                            }
+
+
                             <li>
                                 <div onClick={toggleSubmenu3} className="nav-link px-0 align-middle text-white fw-bold">
                                     <i className="fs-4 bi-grid"></i> <span className="ms-1  d-sm-inline">Stock transfer</span>

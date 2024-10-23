@@ -165,7 +165,7 @@ const ModelMaster = () => {
 
             <div style={{ display: 'flex' }}>
 
-              <select style={{ width: '60%' }} onChange={(e) => setVendorsIdSelect(e.target.value)} className='form-control form-control-md' name="vendorSelect" id="">
+              <select style={{ width: '60%'}} onChange={(e) => setVendorsIdSelect(e.target.value)} className='form-control form-control-md manage-stock-select' name="vendorSelect" id="">
 
                 {
                   vendors ? vendors.map((vens) => (
@@ -218,9 +218,9 @@ const ModelMaster = () => {
                   </tbody>
                 </table>
                 : isSelected ?
-                  <h3 style={{ marginTop: '40px', textAlign: 'left' }}>No Models to Show</h3>
+                  <h3 className='Not-available-Heading' style={{ marginTop: '40px', textAlign: 'left' }}>No Models to Show</h3>
                   :
-                  <h3 style={{ marginTop: '40px', textAlign: 'left' }}>Please select a vendor and Go!</h3>
+                  <h3 className='Not-available-Heading' style={{ marginTop: '40px', textAlign: 'left' }}>Please select a vendor and Go!</h3>
             }
           </div>
 

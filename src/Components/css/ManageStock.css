@@ -86,7 +86,7 @@
             position: relative;
             right: auto;
             left: 0;
-            top: 0;
+            top: -10px;
             justify-content: space-between;
           }
           .manage-stock-select{

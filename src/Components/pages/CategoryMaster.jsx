@@ -154,7 +154,7 @@ const CategoryMaster = () => {
                   </tbody>
                 </table>
                 :
-                <h1>No Category to Show</h1>
+                <h1 className='Not-available-Heading'>No Category to Show</h1>
             }
           </div>
 
