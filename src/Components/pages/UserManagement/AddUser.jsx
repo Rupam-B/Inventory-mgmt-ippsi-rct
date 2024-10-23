@@ -3,6 +3,7 @@ import Sidebar from '../../sidebar/Sidebar'
 import axios from 'axios';
 import { environment } from '../../environment';
 import { useNavigate } from 'react-router-dom';
+import  Loader  from "../Loader";
 
 const AddUser = () => {
 
