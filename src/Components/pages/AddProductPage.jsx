@@ -154,7 +154,7 @@ const uploadProductsFromExcel = () => {
 
             
             console.log("Processed Product:", product);
-
+            setIfLoader(true)
             
             axios.post(`${baseUrl}/api/stocks/add`, product, {
                 headers: {
@@ -163,14 +163,16 @@ const uploadProductsFromExcel = () => {
                 }
             })
             .then(resp => {
-                console.log(`Product added successfully: ${product.productModel}`);
-                alert("Successfully Added")
+                // console.log(`Product added successfully: ${product.productModel}`);
+                toast.success("Successfully Added")
+                setIfLoader(false)
                 navigate('/ManageStock')
                 
             })
             .catch(err => {
                 console.error("Error while adding product:", err);
                 toast.error(err.message + "or wrong Data Entry")
+                setIfLoader(false)
             });
         });
     };
@@ -349,6 +351,9 @@ useEffect(() => {
                                             <div className="form-outline mb-4">
                                                 <label className="form-label fw-bold" htmlFor="formFile">Upload Excel File</label>
                                                 <input onChange={handleFileUpload} type="file" id="formFile" className="form-control" accept=".xlsx, .xls" />
+                                                <p className='excel-format-para'>Format should be <span className='excel-format-span'>usersId</span>,    <span className='excel-format-span'>productId</span>,    <span className='excel-format-span'>serialNumber</span>,    <span className='excel-format-span'>statusId</span>,    <span className='excel-format-span'>description</span>,    <span className='excel-format-span'>productPurchaseDate</span>.
+                                                </p>
+                                                <img style={{width:'80%'}} src={`${process.env.PUBLIC_URL}/example-excel.png`} alt="Example" />
                                             </div>
 
                                             <div className="d-flex justify-content-center">

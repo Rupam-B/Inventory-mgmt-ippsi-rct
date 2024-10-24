@@ -86,12 +86,12 @@ const Sidebar = () => {
                         <ul className="nav nav-pills flex-column mb-sm-auto mb-0  align-items-sm-start" id="menu">
                             <li>
                                 <div onClick={toggleSubmenu1} className="nav-link px-0 align-middle text-white fw-bold">
-                                    <i className="fs-4 bi-speedometer2"></i> <span className="ms-1  d-sm-inline">Dashboard</span>
+                                    <i className="fs-4 bi-speedometer2"></i> <span className="ms-1  d-sm-inline">Home</span>
                                 </div>
                                 {submenu1Open && (
                                     <ul className="nav flex-column ms-1">
                                         <li>
-                                            <Link to={'/home'}className="nav-link px-0  fw-bold drop-down-link">Current Data</Link>
+                                            <Link to={'/home'}className="nav-link px-0  fw-bold drop-down-link">Dashboard</Link>
                                         </li>
                                         <li className="w-100">
                                             <Link to={'/Managestock'} className="nav-link px-0  fw-bold drop-down-link">Manage Stock</Link>

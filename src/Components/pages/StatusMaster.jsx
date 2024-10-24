@@ -132,6 +132,7 @@ const StatusMaster = () => {
                   <thead>
                     <tr>
                       
+                      <th scope="col">Status Id</th>
                       <th scope="col">Status Name</th>
                       
                     </tr>
@@ -139,8 +140,9 @@ const StatusMaster = () => {
                   <tbody>
                     {
                       vendors.map((stocks) => (
-                        <tr key={stocks.statusId}>
+                        <tr key={stocks.statusID}>
                         
+                          <td>{stocks.statusID}</td>
                           <td>{stocks.status}</td>
                           
                         </tr>

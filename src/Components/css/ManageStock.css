@@ -61,6 +61,14 @@
     background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
     }
 
+    .excel-format-para{
+      font-size: small;
+      color: rgb(0, 0, 0);
+    }
+    .excel-format-para span{
+      color: red;
+    }
+
 
 
     @media (max-width: 500px) {
