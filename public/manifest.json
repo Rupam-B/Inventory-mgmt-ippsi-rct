@@ -1,6 +1,6 @@
 {
   "short_name": "Inventory Ipssi",
-  "name": "Create React App Sample",
+  "name": "Inventory Ipssi",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "intelli-logo.jpg",
       "type": "image/png",
       "sizes": "192x192"
     },
