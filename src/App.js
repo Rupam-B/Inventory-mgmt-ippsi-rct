@@ -23,6 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProductMaster from './Components/pages/ProductMaster';
 import AddDevicePage from './Components/pages/AddDevicePage';
 import StatusMaster from './Components/pages/StatusMaster';
+import EditProductPage from './Components/pages/EditProductPage';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path='/StockTransferstatus' element={<StockTransferStatus/>}/>
         <Route path='/ReceiveStockPage' element={<ReceiveStocksPage/>}/>
         <Route path='/AddProductPage' element={<AddProductPage/>}/>
+        <Route path='/EditProductPage/:id' element={<EditProductPage/>}/>
         <Route path='/AddDevicePage' element={<AddDevicePage/>}/>
         <Route path='/vendorMaster' element={<VendorMaster/>}/>
         <Route path='/modelMaster' element={<ModelMaster/>}/>

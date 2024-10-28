@@ -48,10 +48,13 @@ const LoginPage = () => {
 
 
       useEffect(()=>{
-        const checkJwt=localStorage.getItem("ipssi_Jwt")
+        setTimeout(()=>{
+          const checkJwt=localStorage.getItem("ipssi_Jwt")
         if(checkJwt){
           navigate('/home')
         }
+        },1500)
+        
       },[navigate])
 
 

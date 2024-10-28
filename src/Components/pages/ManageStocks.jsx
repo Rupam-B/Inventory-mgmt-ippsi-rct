@@ -19,16 +19,12 @@ const ManageStocks = () => {
 
   const [selectedDevices, setSelectedDevices] = useState([]);
   const [userStocks, setUserStocks] = useState([])
-  const [askQuantity, setAskQuantity] = useState(0)
 
-  const [showModal, setShowModal] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
   const [sourceDestination, setSourceDestination] = useState(null)
   const [usersData, setUsersData] = useState(null)
-  const [addOrSub, setAddOrSub] = useState("true")
 
-  const [presntProId, setPresentProId] = useState()
-  const [presntProQty, setPresentProQty] = useState()
+
 
   const [deviceStatus, setDeviceStatus] = useState([]) 
   const [deviceStatusId, setDeviceStatusId] = useState(0) 
@@ -86,46 +82,10 @@ const ManageStocks = () => {
   }
 
 
-  const showModalFunc = (proId, proQty) => {
-    setShowModal(!showModal)
-    if (!showModal) {
-      // console.log(proId)
-      setPresentProId(proId)
-      setPresentProQty(proQty)
-    }
-  }
 
 
-  const AddQuantityFunc = () => {
-    if (isNaN(askQuantity) || parseInt(askQuantity) < 0) {
-      console.error("Invalid quantity");
-      return;
-    }
 
-    const ThisnewProductQty = addOrSub === "true"
-      ? parseInt(presntProQty) + parseInt(askQuantity)
-      : Math.max(parseInt(presntProQty) - parseInt(askQuantity), 0);
 
-    console.log(ThisnewProductQty);
-
-    axios.put(`${baseUrl}/updateProductQuantity/${presntProId}/user/${fetchUserId}?newProductQty=${ThisnewProductQty}`, null, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(resp => {
-        console.log(`Edit added successfully`);
-        setShowModal(false);
-        setAskQuantity(0)
-      })
-      .catch(err => {
-        console.log(err);
-        setShowModal(false);
-        toast.error("Sorry! Service will be available soon")
-
-      });
-  };
 
 
   const DeleteDeviceFunc = (proId) => {
@@ -135,7 +95,7 @@ const ManageStocks = () => {
 
     if (confirmDelete) {
       setIfLoader(true)
-      axios.delete(`${baseUrl}/deleteProduct/${proId}/user/${fetchUserId}`, {
+      axios.delete(`${baseUrl}/api/stocks/delete/${proId}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
@@ -143,13 +103,13 @@ const ManageStocks = () => {
       })
         .then(resp => {
           setIfLoader(false)
-          alert(resp.data);
+          toast.success("Deleted Succesfully");
           setReload(!reload)
         })
         .catch(err => {
           setIfLoader(false)
           console.log(err);
-          toast.error("Sorry! Service will be available soon")
+          toast.error(err.message)
         });
     } else {
 
@@ -160,29 +120,6 @@ const ManageStocks = () => {
 
 
 
-  // useEffect(() => {
-  //   setIfLoader(true)
-  //   axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   }
-  //   )
-  //     .then((resp) => {
-  //       setIfLoader(false)
-  //       // console.log(resp.data)
-  //       setUserStocks(resp.data)
-  //     })
-  //     .catch((error) => {
-  //       setIfLoader(false)
-  //       console.log(error)
-  //     })
-  // }, [token, baseUrl, fetchUserId, showModal, reload])
-
-
-  // console.log(addOrSub)
-  // console.log(askQuantity)
 
 
   useEffect(() => {
@@ -253,7 +190,7 @@ const ManageStocks = () => {
         )
           .then((resp) => {
             setIfLoader(false)
-            console.log(resp.data)
+            // console.log(resp.data)
             setUserStocks(resp.data)
           })
           .catch((error) => {
@@ -263,11 +200,11 @@ const ManageStocks = () => {
           })
 
       }
-  },[baseUrl, fetchUserId, statuskey, token,deviceStatusId])
+  },[baseUrl, fetchUserId, statuskey, token,deviceStatusId,reload])
 
-  useEffect(()=>{
-    console.log(deviceStatusId)
-  },[deviceStatusId])
+  // useEffect(()=>{
+  //   console.log(deviceStatusId)
+  // },[deviceStatusId])
 
 
 
@@ -309,31 +246,6 @@ const ManageStocks = () => {
                 <button type="button" data-mdb-button-init
                   onClick={generateTransfer}
                   data-mdb-ripple-init className="btn btn-primary">Create transfer</button>
-              </div>
-
-            </form>
-          </div>
-
-          <div className={showModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>
-            <form >
-
-              <div data-mdb-input-init className="form-outline mb-3">
-                <select style={{ width: '60%' }} onChange={(e) => setAddOrSub(e.target.value)} className='form-control form-control-md' name="vendorSelect" id="">
-                  <option value={true}>+</option>
-                  <option value={false}>-</option>
-                </select>
-              </div>
-
-              <div data-mdb-input-init className="form-outline mb-3">
-                <label className="form-label fw-bold" htmlFor="form3Example3cg">Quantity</label>
-                <input value={askQuantity} onChange={(e) => setAskQuantity(e.target.value)} type="number" id="form3Example3cg" className="form-control form-control-md" name="ProductDescription" />
-              </div>
-
-
-
-              <div className="d-flex justify-content-center">
-                <button onClick={AddQuantityFunc} type="button" data-mdb-button-init
-                  data-mdb-ripple-init className="btn btn-primary">Save</button>
               </div>
 
             </form>
@@ -417,8 +329,8 @@ const ManageStocks = () => {
                           <td>{stocks.productCategory}</td>
                           <td className="prod-desc-tab">{stocks.productPurchaseDate}</td>
                           <td className="prod-desc-tab">{stocks.description}</td>
-                          <td><button onClick={() => showModalFunc(stocks.productId, stocks.quantity)} className="btn btn-warning" >Edit</button></td>
-                          <td><button onClick={() => DeleteDeviceFunc(stocks.productId)} className="btn btn-danger">Delete</button></td>
+                          <td><Link  to={`/EditProductPage/${stocks.stockId}`} className="btn btn-warning" >Edit</Link></td>
+                          <td><button onClick={() => DeleteDeviceFunc(stocks.stockId)} className="btn btn-danger">Delete</button></td>
                           {/* <td><button  className="btn btn-success">Full Details</button></td> */}
                         </tr>
                       ))

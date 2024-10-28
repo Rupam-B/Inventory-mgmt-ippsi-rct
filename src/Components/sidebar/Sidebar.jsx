@@ -39,9 +39,9 @@ const Sidebar = () => {
     // };
 
     const handleLogout = () =>{
-        localStorage.removeItem("ipssi_Jwt")
         setTimeout(()=>{
             navigate('/')
+            localStorage.removeItem("ipssi_Jwt")
         },[200])
     }
 
