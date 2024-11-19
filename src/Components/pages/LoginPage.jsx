@@ -4,6 +4,7 @@ import { environment } from '../environment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
 
@@ -51,11 +52,27 @@ const LoginPage = () => {
         setTimeout(()=>{
           const checkJwt=localStorage.getItem("ipssi_Jwt")
         if(checkJwt){
+          setIfLoader(true)
+          axios.get(`${baseUrl}/allDeviceStatus`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${checkJwt}`
+            }
+          })
+            .then(resp => {
+              setIfLoader(false)
+              navigate('/home')
+            })
+            .catch(err => {
+              console.log(err)
+              toast.error(err.message)
+              setIfLoader(false)
+            })
           navigate('/home')
         }
         },1500)
         
-      },[navigate])
+      },[navigate,baseUrl])
 
 
 
