@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { environment } from '../environment'
 import { toast } from 'react-toastify'
+import Loader from './Loader'
 
 
 const HomePage = () => {
@@ -15,6 +16,8 @@ const HomePage = () => {
   const baseUrl = environment.baseUrl
   const token = localStorage.getItem('ipssi_Jwt')
   const navigate = useNavigate();
+
+  const [ifLoader, setIfLoader] = useState(false)
 
   const [userStocks , setUserStocks] = useState([])
   const [availableStatus , setAvailableStatus] = useState()
@@ -45,6 +48,7 @@ const HomePage = () => {
 
 
   useEffect(() => {
+    setIfLoader(true)
     axios.get(`${baseUrl}/allDeviceStatus`, {
       headers: {
         'Content-Type': 'application/json',
@@ -54,10 +58,12 @@ const HomePage = () => {
       .then(resp => {
         // console.log(resp.data)
         setAvailableStatus(resp.data)
+        setIfLoader(false)
       })
       .catch(err => {
         console.log(err)
         toast.error(err.message)
+        setIfLoader(false)
         navigate("/")
       })
   }, [baseUrl, token, navigate])
@@ -68,7 +74,7 @@ const HomePage = () => {
     if (availableStatus && availableStatus.length > 0) {
 
       const newStatusCounts = [];
-
+      setIfLoader(true)
       availableStatus.forEach(status => {
         axios.get(`${baseUrl}/api/stocks/user/${fetchUserId}/status/${status.statusID}`, {
           headers: {
@@ -85,9 +91,11 @@ const HomePage = () => {
             });
 
             setDeviceStatusCounts([...newStatusCounts]);
+            setIfLoader(false)
           })
           .catch(err => {
             console.error(err);
+            setIfLoader(false)
           });
       });
     }
@@ -104,6 +112,12 @@ const HomePage = () => {
 
    
       <div className="content">
+      {
+                ifLoader?    
+                <Loader/>:''
+              }
+
+
       <div  className="content-wrapper">
       <h1 style={{textAlign:'left',marginLeft:'20px'}}>Dashboard</h1>
       <Link to={'/SearchPage'} className='Search-Box-in_dashboard'>
