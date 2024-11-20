@@ -108,7 +108,7 @@ const UserManagement = () => {
         <th scope="col">User Name</th>
         <th scope="col">User Mob</th>
         {/* <!-- <th scope="col">Price</th> --> */}
-        <th scope="col">User Password</th>
+        {/* <th scope="col">User Password</th> */}
         
         {/* <th scope="col"></th> */}
         {/* <th scope="col"></th> */}
@@ -124,7 +124,7 @@ const UserManagement = () => {
         <td>{users.userName}</td>
         <td>{users.mobile}</td>
      
-        <td className="prod-desc-tab" style={{width:'150px' , overflowX:'scroll'}}>{users.password}</td>
+        {/* <td className="prod-desc-tab" style={{width:'150px' , overflowX:'scroll'}}>{users.password}</td> */}
      
         
         {/* <td><Link to={`/EditUser/${users.userId}`} className="btn btn-warning">Edit</Link></td> */}
