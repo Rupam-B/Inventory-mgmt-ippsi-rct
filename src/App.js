@@ -24,6 +24,7 @@ import ProductMaster from './Components/pages/ProductMaster';
 import AddDevicePage from './Components/pages/AddDevicePage';
 import StatusMaster from './Components/pages/StatusMaster';
 import EditProductPage from './Components/pages/EditProductPage';
+import Validator from './Components/pages/Validator';
 
 function App() {
   return (
@@ -32,24 +33,24 @@ function App() {
       <Routes>
         <Route path='/' element={<LoginPage/>}/>
         <Route path='/home' element={<HomePage/>}/>
-        <Route path='/SearchPage' element={<SearchPage/>}/>
-        <Route path='/Users' element={<UserManagement/>}/>
-        <Route path='/EditUser/:userId' element={<EditUser/>}/>
-        <Route path='/AddUser' element={<AddUser/>}/>
-        <Route path='/ManageStock' element={<ManageStock/>}/>
-        <Route path='/OrdersMainPage' element={<OrdersMainPage/>}/>
-        <Route path='/PlaceOrderPage' element={<PlaceOrderPage/>}/>
-        <Route path='/StockTransferRequestPage' element={<StockTransferRequest/>}/>
-        <Route path='/StockTransferstatus' element={<StockTransferStatus/>}/>
-        <Route path='/ReceiveStockPage' element={<ReceiveStocksPage/>}/>
-        <Route path='/AddProductPage' element={<AddProductPage/>}/>
-        <Route path='/EditProductPage/:id' element={<EditProductPage/>}/>
-        <Route path='/AddDevicePage' element={<AddDevicePage/>}/>
-        <Route path='/vendorMaster' element={<VendorMaster/>}/>
-        <Route path='/modelMaster' element={<ModelMaster/>}/>
-        <Route path='/CategoryMaster' element={<CategoryMaster/>}/>
-        <Route path='/ProductMaster' element={<ProductMaster/>}/>
-        <Route path='/StatusMaster' element={<StatusMaster/>}/>
+        <Route path='/SearchPage' element={<Validator>     <SearchPage/>      </Validator>}/>
+        <Route path='/Users' element={<Validator>     <UserManagement/>      </Validator>}/>
+        <Route path='/EditUser/:userId' element={<Validator>     <EditUser/>      </Validator>}/>
+        <Route path='/AddUser' element={<Validator>     <AddUser/>      </Validator>}/>
+        <Route path='/ManageStock' element={<Validator>     <ManageStock/>      </Validator>}/>
+        <Route path='/OrdersMainPage' element={<Validator>     <OrdersMainPage/>      </Validator>}/>
+        <Route path='/PlaceOrderPage' element={<Validator>     <PlaceOrderPage/>      </Validator>}/>
+        <Route path='/StockTransferRequestPage' element={<Validator>     <StockTransferRequest/>      </Validator>}/>
+        <Route path='/StockTransferstatus' element={<Validator>     <StockTransferStatus/>      </Validator>}/>
+        <Route path='/ReceiveStockPage' element={<Validator>     <ReceiveStocksPage/>      </Validator>}/>
+        <Route path='/AddProductPage' element={<Validator>     <AddProductPage/>      </Validator>}/>
+        <Route path='/EditProductPage/:id' element={<Validator>     <EditProductPage/>      </Validator>}/>
+        <Route path='/AddDevicePage' element={<Validator>     <AddDevicePage/>      </Validator>}/>
+        <Route path='/vendorMaster' element={<Validator>     <VendorMaster/>      </Validator>}/>
+        <Route path='/modelMaster' element={<Validator>     <ModelMaster/>      </Validator>}/>
+        <Route path='/CategoryMaster' element={<Validator>     <CategoryMaster/>      </Validator>}/>
+        <Route path='/ProductMaster' element={<Validator>     <ProductMaster/>      </Validator>}/>
+        <Route path='/StatusMaster' element={<Validator>     <StatusMaster/>      </Validator>}/>
       </Routes>
       
     </div>

@@ -80,7 +80,7 @@ const ModelMaster = () => {
       }
       )
         .then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           setVendorModels(resp.data)
         })
         .catch((error) => {

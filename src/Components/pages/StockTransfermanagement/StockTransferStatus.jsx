@@ -45,7 +45,7 @@ const StockTransferStatus = () => {
     )
       .then((resp) => {
         setIfLoader(false)
-        console.log(resp.data)
+        // console.log(resp.data)
         setUserStocks(resp.data)
       })
       .catch((error) => {

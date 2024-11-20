@@ -31,7 +31,7 @@ const UserManagement = () => {
         })
         .then(resp =>{
             setIfLoader(false)
-            console.log(resp.data)
+            // console.log(resp.data)
             setUsersData(resp.data)
         })
         .catch(err=>{
