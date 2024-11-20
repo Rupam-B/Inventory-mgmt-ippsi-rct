@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import '../css/HomePage.css'
 import '../css/root.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { environment } from '../environment'
 import { toast } from 'react-toastify'
@@ -14,6 +14,7 @@ const HomePage = () => {
   const fetchUserId = parseInt(localStorage.getItem('ipssi_userId'))
   const baseUrl = environment.baseUrl
   const token = localStorage.getItem('ipssi_Jwt')
+  const navigate = useNavigate();
 
   const [userStocks , setUserStocks] = useState([])
   const [availableStatus , setAvailableStatus] = useState()
@@ -36,6 +37,7 @@ const HomePage = () => {
     })
     .catch(err=>{
       console.error(err);
+      
     }
     )
   },[baseUrl,fetchUserId,token])
@@ -56,8 +58,9 @@ const HomePage = () => {
       .catch(err => {
         console.log(err)
         toast.error(err.message)
+        navigate("/")
       })
-  }, [baseUrl, token])
+  }, [baseUrl, token, navigate])
 
 
 

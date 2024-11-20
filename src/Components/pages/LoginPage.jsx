@@ -4,7 +4,7 @@ import { environment } from '../environment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 const LoginPage = () => {
 
@@ -65,10 +65,10 @@ const LoginPage = () => {
             })
             .catch(err => {
               console.log(err)
-              toast.error(err.message)
+              // toast.error(err.message)
               setIfLoader(false)
             })
-          navigate('/home')
+          // navigate('/home')
         }
         },1500)
         
