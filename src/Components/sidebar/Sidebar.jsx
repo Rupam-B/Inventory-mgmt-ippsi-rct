@@ -173,6 +173,9 @@ const Sidebar = () => {
                                         <li className="w-100">
                                             <Link to={'/ReceiveStockPage'} className="nav-link px-0 drop-down-link fw-bold">Receive Stocks</Link>
                                         </li>
+                                        <li className="w-100">
+                                            <Link to={'/TransferLogs'} className="nav-link px-0 drop-down-link fw-bold">Transfer Logs</Link>
+                                        </li>
                                         
                                     </ul>
                                 )}

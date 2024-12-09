@@ -14,6 +14,7 @@ const AddUser = () => {
     const [userChName, setUserChName] = useState('')
     const [userChMobile, setUserChMobile] = useState()
     const [userChPassword, setUserChPassword] = useState('')
+    const [userChLocation, setUserChLocation] = useState('')
 
     const [ifLoader, setIfLoader] = useState(false)
 
@@ -24,7 +25,8 @@ const AddUser = () => {
         axios.post(`${baseUrl}/addUser`, {
             userName:userChName,
             mobile:userChMobile,
-            password:userChPassword
+            password:userChPassword,
+            location:userChLocation
         },
         {
             headers:{
@@ -85,6 +87,11 @@ const AddUser = () => {
                                                 <div data-mdb-input-init className="form-outline mb-4">
                                                     <label className="form-label fw-bold" htmlFor="form3Example4cdg">Password</label>
                                                     <input onChange={(e)=>setUserChPassword(e.target.value)} type="text" id="form3Example4cdg" className="form-control form-control-md" name="ProductQuantity" />
+                                                </div>
+
+                                                <div data-mdb-input-init className="form-outline mb-4">
+                                                    <label className="form-label fw-bold" htmlFor="form3Example4cdg">Location</label>
+                                                    <input onChange={(e)=>setUserChLocation(e.target.value)} type="text" id="form3Example4cdg" className="form-control form-control-md" name="ProductQuantity" />
                                                 </div>
 
 

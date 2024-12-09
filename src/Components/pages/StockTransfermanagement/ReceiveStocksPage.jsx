@@ -17,9 +17,14 @@ const ReceiveStocksPage = () => {
 
   const [reload, setReload] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showTransferModal, setShowTransferModal] = useState(false)
   
   const [devicedescription, setDeviceDescription] = useState()
   const [transferId, setTransferId] = useState()
+
+  const [trsfID, setTrsfID] = useState(null)
+  const [cancellationSerialNumb, setCancellationSerialNumb] = useState('')
+  const [checkcancellationSerialNumb, setCheckcancellationSerialNumb] = useState('')
 
 
 
@@ -75,13 +80,43 @@ const ReceiveStocksPage = () => {
   }, [token, baseUrl, fetchUserId,reload])
 
   const openModal = (transfer)=>{
+    setShowTransferModal(false)
     setShowModal(!showModal)
     setTransferId(transfer)
   }
 
 
-
-
+  const openCancelModal = (serialNo,trsfId)=>{
+    setTrsfID(trsfId)
+    setShowTransferModal(true)
+    setCheckcancellationSerialNumb(serialNo)
+  }
+  const ConfirmCancelModal = async ()=>{
+    
+    if(cancellationSerialNumb===checkcancellationSerialNumb){
+      try {
+        setIfLoader(true)
+          await axios.delete(`${baseUrl}/transfer/deleteTransfer/${trsfID}`, {
+            headers: {
+              "Content-Type": "text/plain",
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setIfLoader(false)
+          toast.success("Transfer Deleted Successfully!");
+          setShowTransferModal(false)
+          setReload(!reload)
+          
+      } catch (error) {
+        setIfLoader(false)
+          toast.error("Error Deleting transfer Try again!");
+          setShowTransferModal(false)
+      }
+    }
+    else{
+      toast.error("Wrong serial Number/TransferId")
+    }
+  }
 
 
   return (
@@ -112,6 +147,26 @@ const ReceiveStocksPage = () => {
           </div>
           {/* ------- */}
 
+
+
+            {/*TTransfer-Cancel-Modal */}
+                              <div className={showTransferModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>
+            <form >
+
+              <div data-mdb-input-init className="form-outline mb-3">
+                <label className="form-label fw-bold" htmlFor="form3Example3cg">Enter Serial No.</label>
+                <input  onChange={(e)=>setCancellationSerialNumb(e.target.value)} type="text" id="form3Example3cg" className="form-control form-control-md" name="ProductDescription" />
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <button onClick={ConfirmCancelModal}  type="button" data-mdb-button-init
+                  data-mdb-ripple-init className="btn btn-primary">Confirm Cancellation</button>
+              </div>
+
+            </form>
+          </div>
+          {/* ------- */}
+
           <h1 style={{ textAlign: 'left' }}>Receive Incoming Stocks</h1>
           <br />
           <br />
@@ -133,6 +188,7 @@ const ReceiveStocksPage = () => {
                       <th scope="col">Purchase Date</th>
                       <th scope="col">Vendor</th>
                       <th scope="col">Action</th>
+                      <th scope="col"></th>
                       {/* <th scope="col"></th> */}
                     </tr>
                   </thead>
@@ -147,6 +203,7 @@ const ReceiveStocksPage = () => {
                           <td>{stocks.productPurchaseDate}</td>
                           <td className="prod-desc-tab">{stocks.productMaster.productVendor}</td>
                           <td><button style={{width:'150px'}} onClick={()=>openModal(stocks.transferId)} className="btn btn-success" >Mark as Received</button></td>
+                          <td><button style={{width:'80px'}} onClick={()=>openCancelModal(stocks.serialNumber,stocks.transferId)} className="btn btn-danger" >Cancel</button></td>
                           {/* <td><button  className="btn btn-danger">Delete</button></td> */}
                         </tr>
                       ))

@@ -25,6 +25,7 @@ import AddDevicePage from './Components/pages/AddDevicePage';
 import StatusMaster from './Components/pages/StatusMaster';
 import EditProductPage from './Components/pages/EditProductPage';
 import Validator from './Components/pages/Validator';
+import TransferLogs from './Components/pages/StockTransfermanagement/TransferLogs';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='/StockTransferRequestPage' element={<Validator>     <StockTransferRequest/>      </Validator>}/>
         <Route path='/StockTransferstatus' element={<Validator>     <StockTransferStatus/>      </Validator>}/>
         <Route path='/ReceiveStockPage' element={<Validator>     <ReceiveStocksPage/>      </Validator>}/>
+        <Route path='/TransferLogs' element={<Validator>     <TransferLogs/>      </Validator>}/>
         <Route path='/AddProductPage' element={<Validator>     <AddProductPage/>      </Validator>}/>
         <Route path='/EditProductPage/:id' element={<Validator>     <EditProductPage/>      </Validator>}/>
         <Route path='/AddDevicePage' element={<Validator>     <AddDevicePage/>      </Validator>}/>

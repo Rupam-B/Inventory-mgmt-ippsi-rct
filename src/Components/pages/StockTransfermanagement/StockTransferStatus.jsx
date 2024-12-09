@@ -3,6 +3,7 @@ import Sidebar from '../../sidebar/Sidebar'
 import { environment } from '../../environment'
 import axios from 'axios'
 import Loader from '../Loader'
+import { toast } from 'react-toastify'
 
 const StockTransferStatus = () => {
 
@@ -12,9 +13,14 @@ const StockTransferStatus = () => {
   const token = localStorage.getItem('ipssi_Jwt')
 
   const [userStocks, setUserStocks] = useState([])
+  const [reload, setReload] = useState(false)
 
   
   const [ifLoader, setIfLoader] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [trsfID, setTrsfID] = useState(null)
+  const [cancellationSerialNumb, setCancellationSerialNumb] = useState('')
+  const [checkcancellationSerialNumb, setCheckcancellationSerialNumb] = useState('')
 
   // useEffect(()=>{
   //   axios.get(`${baseUrl}/products/user/${fetchUserId}`, {
@@ -33,6 +39,37 @@ const StockTransferStatus = () => {
   // })
   // },[token,baseUrl,fetchUserId])
 
+  const openCancelModal = (serialNo,trsfId)=>{
+    setTrsfID(trsfId)
+    setShowModal(!showModal)
+    setCheckcancellationSerialNumb(serialNo)
+  }
+  const ConfirmCancelModal =async ()=>{
+    
+    if(cancellationSerialNumb===checkcancellationSerialNumb&&trsfID){
+      try {
+        setIfLoader(true)
+          await axios.delete(`${baseUrl}/transfer/deleteTransfer/${trsfID}`, {
+            headers: {
+              "Content-Type": "text/plain",
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setIfLoader(false)
+          toast.success("Transfer Deleted and Restored to account Successfully!");
+          setShowModal(false)
+          setReload(!reload)
+          
+      } catch (error) {
+        setIfLoader(false)
+          toast.error("Error Deleting transfer");
+          setShowModal(false)
+      }
+    }
+    else{
+      toast.error("Wrong serial Number/Transfer Id")
+    }
+  }
 
   useEffect(() => {
     setIfLoader(true)
@@ -52,7 +89,7 @@ const StockTransferStatus = () => {
         setIfLoader(false)
         console.log(error)
       })
-  }, [token, baseUrl, fetchUserId])
+  }, [token, baseUrl, fetchUserId,reload])
 
 
 
@@ -66,6 +103,24 @@ const StockTransferStatus = () => {
             <Loader /> : ''
         }
         <div className="content-wrapper">
+
+                    {/* Modal */}
+                    <div className={showModal ? 'show-add-vendor-modal' : 'hide-add-vendor-modal'}>
+            <form >
+
+              <div data-mdb-input-init className="form-outline mb-3">
+                <label className="form-label fw-bold" htmlFor="form3Example3cg">Enter Serial No.</label>
+                <input onChange={(e)=>setCancellationSerialNumb(e.target.value)}  type="text" id="form3Example3cg" className="form-control form-control-md" name="ProductDescription" />
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <button onClick={ConfirmCancelModal}  type="button" data-mdb-button-init
+                  data-mdb-ripple-init className="btn btn-primary">Confirm Cancellation</button>
+              </div>
+
+            </form>
+          </div>
+          {/* ------- */}
 
           <h1 style={{ textAlign: 'left' }}>Stock Transfer Status</h1>
           <br />
@@ -88,6 +143,7 @@ const StockTransferStatus = () => {
                       <th scope="col">Purchase Date</th>
                       <th scope="col">Vendor</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Action</th>
                       {/* <th scope="col"></th> */}
                     </tr>
                   </thead>
@@ -105,6 +161,7 @@ const StockTransferStatus = () => {
                           <td>{stocks.productPurchaseDate}</td>
                           <td className="prod-desc-tab">{stocks.productMaster.productVendor}</td>
                           <td><button style={{width:'120px'}} className="btn btn-warning" >In-Transit</button></td>
+                          <td><button style={{width:'80px'}} onClick={()=>openCancelModal(stocks.serialNumber,stocks.transferId)} className="btn btn-danger" >Cancel</button></td>
                           {/* <td><button  className="btn btn-danger">Delete</button></td> */}
                         </tr>
                       ))

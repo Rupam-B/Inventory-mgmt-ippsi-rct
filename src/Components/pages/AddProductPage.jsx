@@ -204,9 +204,9 @@ useEffect(() => {
 
 
 
-    useEffect(()=>{
-        console.log(prodDate)
-    },[prodDate])
+    // useEffect(()=>{
+    //     console.log(prodDate)
+    // },[prodDate])
 
 
 

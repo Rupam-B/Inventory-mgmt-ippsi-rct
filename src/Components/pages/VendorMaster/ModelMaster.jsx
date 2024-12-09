@@ -89,7 +89,7 @@ const ModelMaster = () => {
         })
 
     }
-  }, [vendorsIdselect,baseUrl,token])
+  }, [vendorsIdselect,baseUrl,token,showModal])
 
 
   // }
