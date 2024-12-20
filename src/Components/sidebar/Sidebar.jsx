@@ -96,9 +96,11 @@ const Sidebar = () => {
                                         <li className="w-100">
                                             <Link to={'/Managestock'} className="nav-link px-0  fw-bold drop-down-link">Manage Stock</Link>
                                         </li>
-                                        {/* <li>
-                                            <Link className="nav-link px-0  fw-bold drop-down-link">Manage Orders</Link>
-                                        </li> */}
+                                        {ipssiuserId===1&&
+                                        <li>
+                                            <Link to={'/Allstocks'} className="nav-link px-0  fw-bold drop-down-link">All Stocks</Link>
+                                        </li>
+                                        }
                                     </ul>
                                 )}
                             </li>

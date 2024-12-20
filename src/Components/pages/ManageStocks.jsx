@@ -19,6 +19,8 @@ const ManageStocks = () => {
 
   const [selectedDevices, setSelectedDevices] = useState([]);
   const [userStocks, setUserStocks] = useState([])
+  const [fixedUserStocks, setFixedUserStocks] = useState([])
+  const [userStockCategories, setUserStockCategories] = useState([])
 
   const [showModal2, setShowModal2] = useState(false)
   const [showEditModal2, setShowEditModal2] = useState(false)
@@ -39,6 +41,8 @@ const ManageStocks = () => {
 
   const [deviceStatus, setDeviceStatus] = useState([])
   const [deviceStatusId, setDeviceStatusId] = useState(0)
+
+  const [categorySelect, setCategorySelect] = useState("All")
 
   const statuskey = deviceStatusId && parseInt(deviceStatusId)
 
@@ -169,6 +173,18 @@ const ManageStocks = () => {
       })
   }, [baseUrl, token])
 
+  useEffect(()=>{
+    // console.log(fixedUserStocks)
+    // console.log(userStocks)
+    if(fixedUserStocks&&categorySelect !=="All"){
+        const newUserStock =fixedUserStocks.filter((users)=>users.productCategory===categorySelect)
+        setUserStocks(newUserStock)
+    }
+    else if(fixedUserStocks&&categorySelect ==="All"){
+        setUserStocks(fixedUserStocks)
+    }
+  },[categorySelect,fixedUserStocks])
+
 
   useEffect(() => {
     if (statuskey !== 0) {
@@ -183,6 +199,7 @@ const ManageStocks = () => {
           setIfLoader(false)
           //  console.log(resp.data)
           setUserStocks(resp.data)
+          setFixedUserStocks(resp.data)
         })
         .catch(err => {
           setIfLoader(false)
@@ -204,6 +221,7 @@ const ManageStocks = () => {
           setIfLoader(false)
           // console.log(resp.data)
           setUserStocks(resp.data)
+          setFixedUserStocks(resp.data)
         })
         .catch((error) => {
           setIfLoader(false)
@@ -290,6 +308,28 @@ const ManageStocks = () => {
         toast.error(err.message)
       })
   }, [baseUrl, token])
+
+
+  useEffect(() => {
+    // setIfLoader(true)
+      axios.get(`${baseUrl}/allCategories`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      }
+      )
+        .then((resp) => {
+          // setIfLoader(false)
+          // console.log(resp.data)
+          setUserStockCategories(resp.data)
+        })
+        .catch((error) => {
+          // setIfLoader(false)
+          console.log(error)
+          toast.error(error.message)
+        })
+    }, [token, baseUrl, fetchUserId])
 
 
 
@@ -392,15 +432,16 @@ const ManageStocks = () => {
 
           <div className="Home-table">
             {/* <div className='card'> */}
-
+                  <div className='select-labels-mg-stk'>
             <div style={{ width: '50%', textAlign: 'left' }} data-mdb-input-init className="form-outline mb-3 manage-stock-select">
               {/* <label style={{marginLeft:'5px'}} className="form-label fw-bold" htmlFor="form3Example3cg">Choose Status</label> */}
+              <label style={{marginBottom:'10px'}} htmlFor="status-select">status</label>
               <select
                 style={{ width: '60%' }}
                 onChange={(e) => setDeviceStatusId(e.target.value)}
                 className='form-control form-control-md'
                 name="vendorSelect"
-                id=""
+                id="status-select"
               >
                 {/* Placeholder option */}
                 <option value={0}>All</option>
@@ -415,10 +456,38 @@ const ManageStocks = () => {
                   <option value="">No Status Available</option>
                 )}
               </select>
+            </div>
+
+
+            <div style={{ width: '50%', textAlign: 'left' }} data-mdb-input-init className="form-outline mb-3 manage-stock-select">
+              {/* For Category select */}
+              <label style={{marginBottom:'10px'}} htmlFor="status-select">category</label>
+              <select
+                style={{ width: '60%' }}
+                onChange={(e) => setCategorySelect(e.target.value)}
+                className='form-control form-control-md'
+                name="vendorSelect"
+                id="status-select"
+              >
+                {/* Placeholder option */}
+                <option value={"All"}>All</option>
+
+                {userStockCategories && userStockCategories.length > 0 ? (
+                  userStockCategories.map((category) => (
+                    <option key={category.categoryId} value={category.categoryName}>
+                      {category.categoryName}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">Not Available</option>
+                )}
+              </select>
+
+              {/* -------- */}
 
 
             </div>
-
+            </div>
             {/* </div> */}
 
             {

@@ -36,6 +36,10 @@
       justify-content: flex-end;
     }
 
+    .select-labels-mg-stk{
+      display: flex;
+    }
+
 
 
 
@@ -99,5 +103,8 @@
           }
           .manage-stock-select{
             margin-top: 30px;
+          }
+          .select-labels-mg-stk{
+            display: block;
           }
         }
