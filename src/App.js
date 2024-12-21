@@ -40,7 +40,7 @@ function App() {
         <Route path='/EditUser/:userId' element={<Validator>     <EditUser/>      </Validator>}/>
         <Route path='/AddUser' element={<Validator>     <AddUser/>      </Validator>}/>
         <Route path='/ManageStock' element={<Validator>     <ManageStock/>      </Validator>}/>
-        <Route path='/AllStocks' element={<AllStocksPage/>}/>
+        <Route path='/AllStocks' element={<Validator>    <AllStocksPage/>    </Validator>}/>
         <Route path='/OrdersMainPage' element={<Validator>     <OrdersMainPage/>      </Validator>}/>
         <Route path='/PlaceOrderPage' element={<Validator>     <PlaceOrderPage/>      </Validator>}/>
         <Route path='/StockTransferRequestPage' element={<Validator>     <StockTransferRequest/>      </Validator>}/>
