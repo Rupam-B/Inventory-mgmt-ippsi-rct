@@ -5,11 +5,14 @@ import { environment } from '../environment';
 import '../css/SearchPage.css'
 import { toast } from 'react-toastify'
 import Loader from './Loader';
+import { useNavigate } from 'react-router-dom';
 
 const AllStocksPage = () => {
 
     const baseUrl = environment.baseUrl
     const token = localStorage.getItem('ipssi_Jwt')
+    const ipssiuserId = parseInt(localStorage.getItem("ipssi_userId"))
+    const navigation = useNavigate();
 
     const [ifLoader, setIfLoader] = useState(false)
 
@@ -88,6 +91,14 @@ const AllStocksPage = () => {
             }
         }
     }, [fixeduserStocks, userIDSelect]);
+
+
+
+    useEffect(()=>{
+        if(ipssiuserId!==1){
+            navigation("/home")
+        }
+    },[ipssiuserId,navigation])
 
 
 
