@@ -50,6 +50,9 @@ const ManageStocks = () => {
 
   const [reload, setReload] = useState(false)
 
+  
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+
 
   const handleSelectDevice = (imei) => {
     setSelectedDevices((prev) =>
@@ -333,6 +336,35 @@ const ManageStocks = () => {
 
 
 
+
+        // Sorting logic
+        const handleSort = (key) => {
+          let direction = 'asc';
+          if (sortConfig.key === key && sortConfig.direction === 'asc') {
+              direction = 'desc';
+          }
+          setSortConfig({ key, direction });
+      
+          const getValue = (obj, key) => {
+              return key.includes('.') 
+                  ? key.split('.').reduce((acc, part) => acc && acc[part], obj) 
+                  : obj[key];
+          };
+      
+          const sortedData = [...userStocks].sort((a, b) => {
+              const aValue = getValue(a, key);
+              const bValue = getValue(b, key);
+      
+              if (aValue < bValue) return direction === 'asc' ? -1 : 1;
+              if (aValue > bValue) return direction === 'asc' ? 1 : -1;
+              return 0;
+          });
+      
+          setUserStocks(sortedData);
+      };
+      
+
+
   return (
     <div className="main-container">
       <Sidebar />
@@ -497,16 +529,16 @@ const ManageStocks = () => {
                   <thead>
                     <tr >
                       <th scope="col">S</th>
-                      <th scope="col">P.Id</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Serial No.</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Vendor</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Pur Date</th>
-                      <th scope="col">Description</th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
+                      <th onClick={() => handleSort('productId')} scope="col" className='underline-hover'>P.Id</th>
+                      <th onClick={() => handleSort('productModel')} scope="col" className='underline-hover'>Product Name</th>
+                      <th onClick={() => handleSort('serialNumber')} scope="col" className='underline-hover'>Serial No.</th>
+                      <th onClick={() => handleSort('deviceStatus.status')} scope="col" className='underline-hover'>Status</th>
+                      <th onClick={() => handleSort('productVendor')} scope="col" className='underline-hover'>Vendor</th>
+                      <th onClick={() => handleSort('productCategory')} scope="col" className='underline-hover'>Category</th>
+                      <th onClick={() => handleSort('productPurchaseDate')} scope="col" className='underline-hover'>Pur Date</th>
+                      <th onClick={() => handleSort('description')} scope="col" className='underline-hover'>Description</th>
+                      <th onClick={() => handleSort('productId')} scope="col" className='underline-hover'></th>
+                      <th onClick={() => handleSort('productId')} scope="col" className='underline-hover'></th>
                       {/* <th scope="col"></th> */}
                     </tr>
                   </thead>

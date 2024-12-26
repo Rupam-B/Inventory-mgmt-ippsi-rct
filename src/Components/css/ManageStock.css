@@ -72,6 +72,9 @@
     .excel-format-para span{
       color: red;
     }
+    .underline-hover:hover{
+      text-decoration: underline;
+    }
 
 
 
